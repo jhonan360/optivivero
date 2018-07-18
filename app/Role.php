@@ -15,17 +15,11 @@ class Role extends Model
 {
     /**
      * The primary key for the model.
-     * 
+     *
      * @var string
      */
     protected $primaryKey = 'idRol';
 
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    protected $incrementing = false;
 
     /**
      * @var array

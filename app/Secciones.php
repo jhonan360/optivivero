@@ -18,7 +18,7 @@ class Secciones extends Model
 {
     /**
      * The primary key for the model.
-     * 
+     *
      * @var string
      */
     protected $primaryKey = 'idSeccion';
@@ -26,14 +26,14 @@ class Secciones extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idTipoPlanta', 'nombre', 'observacion', 'created_at', 'updated_at'];
+    protected $fillable = ['idTipoPlanta', 'nombre','espacioTotal', 'observacion', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tipoPlantum()
+    public function tipoPlanta()
     {
-        return $this->belongsTo('App\TipoPlantum', 'idTipoPlanta', 'idTipoPlanta');
+        return $this->belongsTo('App\TipoPlanta', 'idTipoPlanta', 'idTipoPlanta');
     }
 
     /**
@@ -42,5 +42,12 @@ class Secciones extends Model
     public function almacenDatos()
     {
         return $this->hasMany('App\AlmacenDato', 'idSeccion', 'idSeccion');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detalleSeccion()
+    {
+        return $this->hasMany('App\DetalleSecciones', 'idSeccion', 'idSeccion');
     }
 }

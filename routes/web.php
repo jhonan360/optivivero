@@ -12,9 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index'); // aca usted coloca la ruta del archivo
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin'], function()
+{
+	Route::get('/', 'AdminController@inicio')->middleware('auth');
+});
+
+
+
+Route::group(['prefix' => 'user'], function()
+{
+	Route::get('/', 'UserController@inicio')->middleware('auth');
+});

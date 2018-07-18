@@ -62,4 +62,12 @@ class Plantas extends Model
     {
         return $this->hasMany('App\DetalleSolicitud', 'idPlanta', 'idPlanta');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detalleSeccion()
+    {
+        return $this->hasMany('App\DetalleSeccion', 'idPlanta', 'idPlanta');
+    }
 }

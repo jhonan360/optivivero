@@ -43,11 +43,11 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function perfilamiento()
     {
-        return $this->hasMany('App\Perfilamiento');
+        return $this->hasOne('App\Perfilamiento');
     }
 
     /**
@@ -64,5 +64,13 @@ class User extends Authenticatable
     public function solicitudes()
     {
         return $this->hasMany('App\Solicitudes');
+    }
+    /**
+    * Check one role
+    * @param string $role
+    */
+    public function hasRole($role)
+    {
+      return null !== $this->role()->where('nombre', $role)->first();
     }
 }
