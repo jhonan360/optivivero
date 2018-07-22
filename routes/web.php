@@ -22,6 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin'], function()
 {
 	Route::get('/', 'AdminController@inicio')->middleware('auth');
+	Route::get('/usuarios', 'AdminController@usuarios')->middleware('auth');
+	// otros
+	Route::post('/tableUser', 'AdminController@tableUser')->middleware('auth');
+	Route::post('/estadoUsuario', 'AdminController@estadoUsuario')->middleware('auth');
+	Route::post('/usuarioAlmacenar', 'AdminController@usuarioAlmacenar')->middleware('auth');
 });
 
 
