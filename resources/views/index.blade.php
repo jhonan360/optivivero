@@ -65,9 +65,9 @@
                                     <li><a href="#welcome">¿Quienes somos?</a></li>
                                     <li><a href="#portfolio">Mision</a></li>
                                     <li><a href="#counter">Vision</a></li>
-                                    <li><a href="#event">Login</a></li>
                                     <li><a href="#testimonial">Contactanos</a></li>
                                     <li><a href="#contact">contact us</a></li>
+                                    <li><a href="{{ route('login') }}">iniciar sesion</a></li>
                                 </ul>
                             </div>
                             <!-- /.navbar-collapse -->
