@@ -23,7 +23,16 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i>Plantas</a>
+                            <a href="#"><i class="fa fa-tree fa-fw"></i> Plantas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admin/plantas">Plantas</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/tipoPlanta">Tipo De Plantas</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i>Secciones</a>
@@ -32,7 +41,7 @@
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i>Reportes</a>
                         </li>
                         <li>
-                            <a href="admin/usuarios"><i class="fa fa-user fa-fw"></i> Usuario</a>
+                            <a href="/admin/usuarios"><i class="fa fa-user fa-fw"></i> Usuario</a>
                         </li>
                     </ul>
                 </div>
