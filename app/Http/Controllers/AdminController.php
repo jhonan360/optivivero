@@ -154,7 +154,7 @@ class AdminController extends Controller
             $b.='<i class="fa fa-pencil"></i></button>';
 
             array_push($array,array(
-                $planta->idPlanta,$planta->tipoPlanta->nombre,$planta->nombre,$planta->cantidad,'$'.money_format('%(#10n', $planta->valor),$b));
+                $planta->idPlanta,$planta->tipoPlanta->nombre,$planta->nombre,$planta->cantidad,'$'.$planta->valor,$b));
 
         }
         return Response::json(array('html' => $array));
@@ -208,7 +208,7 @@ class AdminController extends Controller
         $file = $request->file('file');
         if ($param=='update') {
             if ($file) {
-                $ruta='img/tipoPlantas/'.$id.'.png';
+                $ruta='/img/tipoPlantas/'.$id.'.png';
                 file_put_contents($ruta, File::get($file));
                 $query='UPDATE tipoPlanta SET nombre="'.$nombre.'",imagen="'.$ruta.'" WHERE idTipoPlanta="'.$id.'"';
             }else{
@@ -220,10 +220,10 @@ class AdminController extends Controller
             $tipoPlanta = new TipoPlanta;
             $tipoPlanta->nombre=$nombre;
             if ($file) {
-                $ruta='source/img/tipoPlantas/'.$id.'.png';
+                $ruta='/source/img/tipoPlantas/'.$id.'.png';
                 file_put_contents($ruta, File::get($file));
             }else{
-                $ruta='source/img/tipoPlantas/default.png';
+                $ruta='/source/img/tipoPlantas/default.png';
             }
             $tipoPlanta->imagen=$ruta;
             $tipoPlanta->save();
