@@ -12,6 +12,9 @@ use App\User;
 use App\Perfilamiento;
 use App\TipoPlanta;
 use App\Plantas;
+use App\Proveedores;
+use App\DetalleSolicitud;
+use App\Solicitudes;
 
 
 class AdminController extends Controller
@@ -31,6 +34,12 @@ class AdminController extends Controller
     public function tipoPlanta()
     {
         return view('admin.tipoPlanta');
+    }
+    public function pedidos()
+    {
+        $plantas=Plantas::all();
+        $proveedores=Proveedores::all();
+        return view('admin.pedidos',['plantas' => $plantas,'proveedores' => $proveedores]);
     }
     public function tableUser(Request $request)
     {
@@ -57,7 +66,7 @@ class AdminController extends Controller
 
     		array_push($array,array(
     			$user->perfilamiento->nombres.' '.$user->perfilamiento->apellidos,$user->email,$user->role->nombre,$user->perfilamiento->cedula,$user->perfilamiento->telefono,$user->perfilamiento->direccion,
-    			'<img src="/'.$user->perfilamiento->imagen.'" style="width: 35px;height: 35px;border-radius: 50%;overflow:hidden;" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
+    			'<img src="'.asset($user->perfilamiento->imagen).'" style="width: 35px;height: 35px;border-radius: 50%;overflow:hidden;" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
                         ',$a,$b));
 
     	}
@@ -77,6 +86,8 @@ class AdminController extends Controller
 
     public function usuarioAlmacenar(Request $request)
     {
+        ini_set('memory_limit', '1000M');
+        set_time_limit(50);
         $email=$_POST['email'];
         $password=bcrypt($_POST['password']);
         $param=$_POST['param'];
@@ -95,7 +106,7 @@ class AdminController extends Controller
             $user->save();
 
             if ($file) {
-                $ruta='img/usuarios/'.$id.'.png';
+                $ruta='source/img/users/'.$id.'.png';
                 file_put_contents($ruta, File::get($file));
                 $query='UPDATE perfilamiento SET nombres="'.$nombres.'",apellidos="'.$apellidos.'",telefono="'.$telefono.'",direccion="'.$direccion.'",imagen="'.$ruta.'" WHERE user_id="'.$id.'"';
             }else{
@@ -194,7 +205,7 @@ class AdminController extends Controller
 
             array_push($array,array(
                 $tipoPlanta->idTipoPlanta,$tipoPlanta->nombre,
-                '<img src="'.$tipoPlanta->imagen.'" style="width: 35px;height: 35px;border-radius: 50%;overflow:hidden;" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
+                '<img src="'.asset($tipoPlanta->imagen).'" style="width: 35px;height: 35px;border-radius: 50%;overflow:hidden;" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
                         ',$b));
 
         }
@@ -202,13 +213,15 @@ class AdminController extends Controller
     }
     public function tipoPlantaAlmacenar(Request $request)
     {
+        ini_set('memory_limit', '1000M');
+        set_time_limit(50);
         $id=$_POST['idTipoPlanta'];
         $param=$_POST['param'];
         $nombre=$_POST['nombre'];
         $file = $request->file('file');
         if ($param=='update') {
             if ($file) {
-                $ruta='/img/tipoPlantas/'.$id.'.png';
+                $ruta='source/img/tipoPlantas/'.$id.'.png';
                 file_put_contents($ruta, File::get($file));
                 $query='UPDATE tipoPlanta SET nombre="'.$nombre.'",imagen="'.$ruta.'" WHERE idTipoPlanta="'.$id.'"';
             }else{
@@ -220,16 +233,46 @@ class AdminController extends Controller
             $tipoPlanta = new TipoPlanta;
             $tipoPlanta->nombre=$nombre;
             if ($file) {
-                $ruta='/source/img/tipoPlantas/'.$id.'.png';
+                $ruta='source/img/tipoPlantas/'.$id.'.png';
                 file_put_contents($ruta, File::get($file));
             }else{
-                $ruta='/source/img/tipoPlantas/default.png';
+                $ruta='source/img/tipoPlantas/default.png';
             }
             $tipoPlanta->imagen=$ruta;
             $tipoPlanta->save();
         }
             return Response::json('ok');
     }
-
+    public function hacerPedido(Request $request){
+        $nombre=$_POST['nombre'];
+        $idProveedor=$_POST['idProveedor'];
+        $observacion=$_POST['observacion'];
+        $tableContent=$_POST['tableContent'];
+        $cantidadTotal=0;
+        $valorTotal=0;
+        for ($i=0; $i <count($tableContent); $i++) {
+            $cantidadTotal+=$tableContent[$i]['cantidad'];
+            $valorTotal+=$tableContent[$i]['valor'];
+        }
+        $solicitud= new Solicitudes;
+        $solicitud->user_id=Auth::user()->id;
+        $solicitud->idProveedor=$idProveedor;
+        $solicitud->nombre=$nombre;
+        $solicitud->FechaHora=Date('Y-m-d H:i:s');
+        $solicitud->cantidadTotal=$cantidadTotal;
+        $solicitud->valorTotal=$valorTotal;
+        $solicitud->observacion1=$observacion;
+        $solicitud->save();
+        $idSolicitud=$solicitud->idSolicitud;
+        for ($i=0; $i <count($tableContent); $i++) {
+            $detalleSolicitud= new DetalleSolicitud;
+            $detalleSolicitud->idSolicitud=$idSolicitud;
+            $detalleSolicitud->idPlanta=$tableContent[$i]['id'];
+            $detalleSolicitud->cantidad=$tableContent[$i]['cantidad'];
+            $detalleSolicitud->valor=$tableContent[$i]['valor'];
+            $detalleSolicitud->save();
+        }
+        return Response::json('ok');
+    }
 }
 

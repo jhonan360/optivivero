@@ -79,7 +79,6 @@ $("#formTipoPlantas").on("submit", function(e){
     file=$("#file").val();
     tipoPlanta=$("#tipoPlanta").val();
     paramSend=null;
-    file=$("#file").val();
     if (param=="Editar") {
         paramSend='update';
 
@@ -90,7 +89,6 @@ $("#formTipoPlantas").on("submit", function(e){
     formData.append('nombre',nombre);
     formData.append('idTipoPlanta',idTipoPlanta);
     formData.append('param',paramSend);
-    alert(idTipoPlanta)
         $.ajax({
              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             method: "POST",
@@ -112,3 +110,12 @@ $("#formTipoPlantas").on("submit", function(e){
 
     return false;
 });
+
+function extension()
+{
+    var archivo = $("#file").val();
+    var extension = archivo.substring(archivo.lastIndexOf("."));
+    if (extension != ".jpg" && extension != ".png"&& extension != ".jpeg") {
+        $("#file").val("");
+    }
+}

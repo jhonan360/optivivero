@@ -173,7 +173,7 @@ $("#formUsuario").on("submit", function(e){
                     }
         }).fail(function(response) {
             alert('No se pudó guardar el usuario email.');
-        });;
+        });
     }else{
         alert('Las contraseñas deben ser iguales');
     }

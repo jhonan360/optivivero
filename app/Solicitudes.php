@@ -34,7 +34,7 @@ class Solicitudes extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'idProveedor', 'nombre', 'fechaHora', 'cantidadTotal', 'valorTotal', 'obervacion1', 'observacion2', 'created_at', 'updated_at'];
+    protected $fillable = ['idSolicitud','user_id', 'idProveedor', 'nombre', 'fechaHora', 'cantidadTotal', 'valorTotal', 'observacion1', 'observacion2', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

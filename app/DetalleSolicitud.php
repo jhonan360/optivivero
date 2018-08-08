@@ -26,7 +26,7 @@ class DetalleSolicitud extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cantidad', 'valor', 'created_at', 'updated_at'];
+    protected $fillable = ['idSolicitud','idPlanta','cantidad', 'valor', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
