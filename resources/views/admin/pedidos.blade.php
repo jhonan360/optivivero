@@ -77,7 +77,45 @@
         </div>
      <form action="">
             <input type="hidden" id="plantas" data-plantas="{{ $plantas }}">
-        </form>
+    </form>
+    <hr>
+    <div class="row" style="margin-top: 5%;">
+        <div class="col-lg-12">
+            <table width="100%" class="table table-striped table-bordered table-hover table-responsive" id="datatablePedidos">
+                <thead>
+                    <tr>
+                        <th scope="col">Nº</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 </tbody>
+            </table>
+        </div>
+    </div>
+<div id="modalPedido" class="modal fade" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 id="titleModal" class="modal-title"></h4>
+      </div>
+      <div class="modal-body" style="overflow-y: scroll;height: auto;">
+            <div id="tableModal"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 @endsection
     @section('javascript')

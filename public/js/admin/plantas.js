@@ -8,8 +8,9 @@ function llenarTabla()
 {
 	$('#datatable').DataTable();
     //Buttons examples
-    var table = $('#datatableUser').DataTable({
+    var table = $('#datatablePlantas').DataTable({
         destroy: true,
+        responsive: true,
         language: {
         "decimal": "",
         "emptyTable": "No hay información",

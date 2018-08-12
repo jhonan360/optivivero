@@ -19,6 +19,9 @@
                                 <li>
                                     <a href="morris.html">Ventas</a>
                                 </li>
+                                <li>
+                                    <a href="/admin/proveedores">Proveedores</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

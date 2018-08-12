@@ -3,7 +3,7 @@ console.log(plantas	);
 var tableContent=[];
 $(document).ready(function()
 {
-	//llenarTabla();
+	llenarTabla();
 });
 function sumar(){
 	var suma=0;
@@ -91,10 +91,83 @@ function hacerPedido(){
 			$("#cantidad").val('');
 			$("#valor").val('');
 			$("#tablePlantas tr").remove();
+			llenarTabla();
         }).fail(function(response) {
             alert('No se pudó agregar el pedido.');
         });
 	}else{
 		alert("ningun campo debe estar vacio");
 	}
+}
+function llenarTabla()
+{
+	$('#datatable').DataTable();
+    //Buttons examples
+    var table = $('#datatablePedidos').DataTable({
+        destroy: true,
+        responsive: true,
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+    });
+	var t = $('#datatablePedidos').DataTable();
+    t.clear();
+	$.ajax({
+		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+		method: "POST",
+		url: "/admin/tablePedido",
+		dataType: 'json',
+		data: {}
+	})
+	.done(function(response){
+		var array=response.html;
+		console.log(array);
+		for (var i = 0; i < array.length; i++) {
+			t.row.add( [
+				array[i][0],
+				array[i][1],
+				array[i][2],
+				array[i][3],
+				array[i][4],
+                array[i][5],
+                array[i][6],
+                array[i][7],
+	        ] ).draw( false );
+
+		}
+	});
+}
+function openModal(id)
+{
+	$.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            method: "POST",
+            url: "/admin/tableSolicitudes",
+            dataType: 'json',
+            data: { id: id}
+            })
+        .done(function(response){
+			console.log(response.html);
+			$("#tableModal").html(response.html);
+			$("#titleModal").html('<h4 id="titleModal" class="modal-title">Pedido '+response.solicitud.nombre+'</h4>');
+        }).fail(function(response) {
+			$("#tableModal").html('No se puede cargar el contenido de la tabla');
+        });
 }

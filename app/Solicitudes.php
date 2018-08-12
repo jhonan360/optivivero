@@ -39,7 +39,7 @@ class Solicitudes extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function proveedore()
+    public function proveedor()
     {
         return $this->belongsTo('App\Proveedores', 'idProveedor', 'idProveedor');
     }

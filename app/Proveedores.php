@@ -27,7 +27,7 @@ class Proveedores extends Model
     /**
      * @var array
      */
-    protected $fillable = ['nit', 'razonSocial', 'telefono', 'direccion', 'email', 'created_at', 'updated_at'];
+    protected $fillable = ['nit', 'razonSocial', 'telefono', 'direccion','created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -35,5 +35,12 @@ class Proveedores extends Model
     public function solicitudes()
     {
         return $this->hasMany('App\Solicitudes', 'idProveedor', 'idProveedor');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }
