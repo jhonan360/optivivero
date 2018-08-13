@@ -62,11 +62,9 @@
                             <div class="collapse navbar-collapse zero_mp" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav navbar-right main_menu">
                                     <li class="active"><a href="#header">Inicio<span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#welcome">¿Quienes somos?</a></li>
+                                    <li><a href="#about">¿Quienes somos?</a></li>
                                     <li><a href="#portfolio">Mision</a></li>
                                     <li><a href="#counter">Vision</a></li>
-                                    <li><a href="#testimonial">Contactanos</a></li>
-                                    <li><a href="#contact">contact us</a></li>
                                     <li><a href="{{ route('login') }}">iniciar sesion</a></li>
                                 </ul>
                             </div>
@@ -115,10 +113,10 @@
                             <img src="/source/img/home/carro2.png" alt="...">
                             <div class="carousel-caption">
                                 <div class="slider_text">
-                                    <h3>Protect</h3>
+                                    <h3>OPTI VIVERO</h3>
                                     <h2>nature the environment</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    <a href="" class="custom_btn">Read  More</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -152,7 +150,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="wel_header">
-                            <h2>welcome to green fair</h2>
+                            <h2>¿ Quienes somos?</h2>
                             <p>Our Green Fire Organization is one of the non profit organization near you. Get our services like</p>
                         </div>
                     </div>
@@ -230,16 +228,11 @@
                 <div class="row vol_area">
                     <div class="col-md-8">
                         <div class="volunteer_content">
-                            <h3>Become a <span>Volunteer</span></h3>
+                            <h3>Mis<span>ión</span></h3>
                             <p>Join Our Team And Help the world. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur.</p>
                         </div>
                     </div>
                     <!--End of col-md-8-->
-                    <div class="col-md-3 col-md-offset-1">
-                        <div class="join_us">
-                            <a href="" class="vol_cust_btn">join us</a>
-                        </div>
-                    </div>
                     <!--End of col-md-3-->
                 </div>
                 <!--End of row and vol_area-->
@@ -247,98 +240,6 @@
             <!--End of container-->
         </section>
         <!--end of volunteer-->
-
-
-
-        <!--Start of portfolio-->
-        <section id="portfolio" class="text-center">
-            <div class="col-md-12">
-                <div class="portfolio_title">
-                    <h2>our latest work</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
-                </div>
-            </div>
-            <!--End of col-md-2-->
-            <div class="colum">
-                <div class="container">
-                    <div class="row">
-                        <form action="/">
-                            <ul id="portfolio_menu" class="menu portfolio_custom_menu">
-                                <li>
-                                    <button data-filter="*" class="my_btn btn_active">Show All</button>
-                                </li>
-                                <li>
-                                    <button data-filter=".blue, .black, .green" class="my_btn">environment</button>
-                                </li>
-                                <li>
-                                    <button data-filter=".red, .green" class="my_btn">climate</button>
-                                </li>
-                                <li>
-                                    <button data-filter=".blue, .yellow, .black" class="my_btn">photography</button>
-                                </li>
-                                <li>
-                                    <button data-filter=".black" class="my_btn">species</button>
-                                    <!--
-                                </li>
-                                <li>
-                                    <button data-filter=".black" class="my_btn">Black</button>
-                                </li>
-                                    -->
-                            </ul>
-                            <!--End of portfolio_menu-->
-                        </form>
-                        <!--End of Form-->
-                    </div>
-                    <!--End of row-->
-                </div>
-                <!--End of container-->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="notes">
-                                <div class="note blue">
-                                    <div class="img_overlay">
-                                        <p>Sun Homes, Dhaka</p>
-                                    </div>
-                                    <img src="img/environment.jpg" alt="">
-                                </div>
-                                <div class="note red">
-                                    <div class="img_overlay">
-                                        <p>Sun Homes, Dhaka</p>
-                                    </div>
-                                    <img src="img/portfolio_1.jpg" alt="">
-                                </div>
-                                <div class="note green">
-                                    <div class="img_overlay">
-                                        <p>Sun Homes, Dhaka</p>
-                                    </div>
-                                    <img src="img/cliemate.jpg" alt="">
-                                </div>
-                                <div class="note yellow">
-                                    <div class="img_overlay">
-                                        <p>Sun Homes, Dhaka</p>
-                                    </div>
-                                    <img src="img/photography.jpg" alt="">
-                                </div>
-                                <div class="note black">
-                                    <div class="img_overlay">
-                                        <p>Sun Homes, Dhaka</p>
-                                    </div>
-                                    <img src="img/species.jpg" alt="">
-                                </div>
-                            </div>
-                            <!--End of notes-->
-                        </div>
-                        <!--End of col-lg-12-->
-                    </div>
-                    <!--End of row-->
-                </div>
-                <!--End of container-->
-            </div>
-            <!--End of colum-->
-        </section>
-        <!--end of portfolio-->
-
 
 
         <!--Start of counter-->
@@ -744,27 +645,6 @@
         </section>
         <!-- end of blog-->
 
-
-
-        <!--Start of Purches-->
-        <section id="purches">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2 class="purches_title">Buy our wordpress theme</h2>
-                    </div>
-                    <div class="col-md-2 col-md-offset-4">
-                        <a href="" class="purches_btn">purches</a>
-                    </div>
-                </div>
-                <!--End of row-->
-            </div>
-            <!--End of container-->
-        </section>
-        <!--End of purches-->
-
-
-
         <!--Start of Market-->
         <section id="market">
             <div class="container">
@@ -805,96 +685,16 @@
         </section>
         <!--End of market-->
 
-
-
-        <!--Start of contact-->
-        <section id="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="colmd-12">
-                        <div class="contact_area text-center">
-                            <h3>get in touch</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                </div>
-                <!--End of row-->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="office">
-                            <div class="title">
-                                <h5>our office info</h5>
-                            </div>
-                            <div class="office_location">
-                                <div class="address">
-                                    <i class="fa fa-map-marker"><span>Elephant Road, Dhaka 1205, Bangladesh</span></i>
-                                </div>
-                                <div class="phone">
-                                    <i class="fa fa-phone"><span>+ 8801532-987039</span></i>
-                                </div>
-                                <div class="email">
-                                    <i class="fa fa-envelope"><span>youremail@mail.com</span></i>
-                                </div>
-                                <div id="map"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="msg">
-                            <div class="msg_title">
-                                <h5>Drop A Message</h5>
-                            </div>
-                            <div class="form_area">
-                                <!-- CONTACT FORM -->
-                                <div class="contact-form wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-                                    <div id="message"></div>
-                                    <form action="scripts/contact.php" class="form-horizontal contact-1" role="form" name="contactform" id="contactform">
-                                        <div class="form-group">
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="name" id="name" placeholder="Name">
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <input type="subject" class="form-control" id="subject" placeholder="Subject *">
-                                                <div class="text_area">
-                                                    <textarea name="contact-message" id="msg" class="form-control" cols="30" rows="8" placeholder="Message"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn custom-btn" data-loading-text="Loading...">Send</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of col-md-6-->
-                </div>
-                <!--End of row-->
-            </div>
-            <!--End of container-->
-        </section>
-        <!--End of contact-->
-
-
-
         <!--Start of footer-->
         <section id="footer">
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-6">
                         <div class="copyright">
-                            <p>@ 2016 - Design By <span><a href="">&#9798;</a></span></p>
+                            <p>@ 2018 - Optivivero <span><a href=""></a></span></p>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="designer">
-                            <p>A Design By <a href="#">XpeedStudio</a></p>
-                        </div>
-                    </div>
+                    
                 </div>
                 <!--End of row-->
             </div>
