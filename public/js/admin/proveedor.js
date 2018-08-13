@@ -1,13 +1,15 @@
 $(document).ready(function()
 {
 	llenarTabla();
+
 });
+
 
 function llenarTabla()
 {
 	$('#datatable').DataTable();
     //Buttons examples
-    var table = $('#datatableUser').DataTable({
+    var table = $('#datatableProveedores').DataTable({
         destroy: true,
         responsive: true,
         language: {
@@ -31,12 +33,12 @@ function llenarTabla()
         }
     },
     });
-	var t = $('#datatableUser').DataTable();
+	var t = $('#datatableProveedores').DataTable();
     t.clear();
 	$.ajax({
 		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		method: "POST",
-		url: "/admin/tableUser",
+		url: "/admin/tableProveedores",
 		dataType: 'json',
 		data: {}
 	})
@@ -52,7 +54,8 @@ function llenarTabla()
                 array[i][5],
                 array[i][6],
                 array[i][7],
-				array[i][8],
+                array[i][8],
+				array[i][9],
 	        ] ).draw( false );
 
 		}
@@ -71,45 +74,42 @@ function switchEstado(name,id){
         .done(function(response){
             });
 }
-function modal(email,cedula,nombres,apellidos,telefono,direccion)
+function modal(email,nit,razonSocial,telefono,direccion)
 {
     window.scroll(0, 0);
     if (email!=undefined) {
+        $("#file").val("");
         $("#email").val("");
         $("#password").val("");
         $("#repetirPassword").val("");
-        $("#cedula").val("");
-        $("#nombres").val("");
-        $("#apellidos").val("");
+        $("#nit").val("");
+        $("#razonSocial").val("");
         $("#telefono").val("");
         $("#direccion").val("");
-        $("#file").val("");
         $("#email").prop("disabled",true);
         $("#email").val(email);
         $("#password").val("");
         $("#password").prop("required",false);
         $("#repetirPassword").val("");
         $("#repetirPassword").prop("required",false);
-        $("#cedula").prop("disabled",true);
-        $("#cedula").val(cedula);
-        $("#nombres").val(nombres);
-        $("#apellidos").val(apellidos);
+        $("#nit").prop("disabled",true);
+        $("#nit").val(nit);
+        $("#razonSocial").val(razonSocial);
         $("#telefono").val(telefono);
         $("#direccion").val(direccion);
-        $("#titleModal").html('<h4 id="titleModal" class="modal-title">Editar Usuario</h4>');
+        $("#titleModal").html('<h4 id="titleModal" class="modal-title">Editar Proveedor</h4>');
         $("#btnModal1").val('Editar');
 
     }else{
-        $("#titleModal").html('<h4 id="titleModal" class="modal-title">Crear Usuario</h4>');
+        $("#titleModal").html('<h4 id="titleModal" class="modal-title">Crear Proveedor</h4>');
         $("#email").removeAttr("disabled");
-        $("#cedula").removeAttr("disabled");
+        $("#nit").removeAttr("disabled");
         $("#btnModal1").val('Guardar');
         $("#email").val("");
         $("#password").val("");
         $("#repetirPassword").val("");
-        $("#cedula").val("");
-        $("#nombres").val("");
-        $("#apellidos").val("");
+        $("#nit").val("");
+        $("#razonSocial").val("");
         $("#telefono").val("");
         $("#direccion").val("");
         $("#file").val("");
@@ -118,28 +118,20 @@ function modal(email,cedula,nombres,apellidos,telefono,direccion)
     }
 }
 
-function extension()
-{
-    var archivo = $("#file").val();
-    var extension = archivo.substring(archivo.lastIndexOf("."));
-    if (extension != ".jpg" && extension != ".png"&& extension != ".jpeg") {
-        $("#file").val("");
-    }
-}
 
-$("#formUsuario").on("submit", function(e){
+
+$("#formProveedor").on("submit", function(e){
     e.preventDefault();
     param=$("#btnModal1").val();
     email=$("#email").val();
     password=$("#password").val();
     repetirPassword=$("#repetirPassword").val();
-    cedula=$("#cedula").val();
-    nombres=$("#nombres").val();
-    apellidos=$("#apellidos").val();
+    nit=$("#nit").val();
+    razonSocial=$("#razonSocial").val();
     telefono=$("#telefono").val();
     direccion=$("#direccion").val();
-    file=$("#file").val();
     paramSend=null;
+    file=$("#file").val();
 
     if (param=="Editar") {
         paramSend='update';
@@ -147,12 +139,11 @@ $("#formUsuario").on("submit", function(e){
     }else{
         paramSend='create';
     }
-    var formData = new FormData(document.getElementById("formUsuario"));
+    var formData = new FormData(document.getElementById("formProveedor"));
     formData.append('email',email);
     formData.append('password',password);
-    formData.append('cedula',cedula);
-    formData.append('nombres',nombres);
-    formData.append('apellidos',apellidos);
+    formData.append('nit',nit);
+    formData.append('razonSocial',razonSocial);
     formData.append('telefono',telefono);
     formData.append('direccion',direccion);
     formData.append('param',paramSend);
@@ -160,7 +151,7 @@ $("#formUsuario").on("submit", function(e){
         $.ajax({
              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             method: "POST",
-            url: "/admin/usuarioAlmacenar",
+            url: "/admin/proveedorAlmacenar",
             dataType: "html",
             data: formData,
             cache: false,
@@ -170,10 +161,10 @@ $("#formUsuario").on("submit", function(e){
                 .done(function(response){
                     if (response=='"ok"') {
                         llenarTabla();
-                        $('#modalUsuarios').modal('toggle');
+                        $('#modalProveedor').modal('toggle');
                     }
         }).fail(function(response) {
-            alert('No se pudó guardar el usuario email.');
+            alert('No se pudó guardar el proveedor.');
         });
     }else{
         alert('Las contraseñas deben ser iguales');
@@ -181,3 +172,24 @@ $("#formUsuario").on("submit", function(e){
 
     return false;
 });
+function switchEstado(name,id){
+    var estado = document.getElementById(name).checked;
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            method: "POST",
+            url: "/admin/estadoUsuario",
+            dataType: 'json',
+            data: { id: id,
+                    estado:estado}
+            })
+        .done(function(response){
+            });
+}
+function extension()
+{
+    var archivo = $("#file").val();
+    var extension = archivo.substring(archivo.lastIndexOf("."));
+    if (extension != ".jpg" && extension != ".png"&& extension != ".jpeg") {
+        $("#file").val("");
+    }
+}

@@ -11,13 +11,16 @@
                                     <a href="flot.html">Entradas</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Pedido</a>
+                                    <a href="/admin/pedidos">Pedido</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Salidas</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Ventas</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/proveedores">Proveedores</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
