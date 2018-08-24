@@ -229,11 +229,7 @@ class AdminController extends Controller
         $file = $request->file('file');
         if ($param=='update') {
             if ($file) {
-<<<<<<< HEAD
-                $ruta='/source/img/tipoPlantas/'.$id.'.png';
-=======
                 $ruta='source/img/tipoPlantas/'.$id.'.png';
->>>>>>> f771de23bbdff7848e21295ab74a2f9e9891c41b
                 file_put_contents($ruta, File::get($file));
                 $query='UPDATE tipoPlanta SET nombre="'.$nombre.'",imagen="'.$ruta.'" WHERE idTipoPlanta="'.$id.'"';
             }else{
