@@ -79,7 +79,12 @@
             <input type="hidden" id="plantas" data-plantas="{{ $plantas }}">
     </form>
     <hr>
-    <div class="row" style="margin-top: 5%;">
+    <div class="row" style="margin-top: 1%;">
+        <div class="col-lg-12 col-xs-12 text-center" style="margin-bottom: 5px;">
+            <h1>Pedidos</h1>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 1%;">
         <div class="col-lg-12">
             <table width="100%" class="table table-striped table-bordered table-hover table-responsive" id="datatablePedidos">
                 <thead>

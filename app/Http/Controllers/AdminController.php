@@ -230,10 +230,14 @@ class AdminController extends Controller
         if ($param=='update') {
             if ($file) {
 <<<<<<< HEAD
+
                 $ruta='/source/img/tipoPlantas/'.$id.'.png';
+
+
+
 =======
                 $ruta='source/img/tipoPlantas/'.$id.'.png';
->>>>>>> f771de23bbdff7848e21295ab74a2f9e9891c41b
+>>>>>>> 54d7f9f80785af7018f6c5b36b81d47aa6ced5ad
                 file_put_contents($ruta, File::get($file));
                 $query='UPDATE tipoPlanta SET nombre="'.$nombre.'",imagen="'.$ruta.'" WHERE idTipoPlanta="'.$id.'"';
             }else{
@@ -325,7 +329,7 @@ class AdminController extends Controller
                                 <tbody>
         ';
         foreach ($detalleSolicitudes as $key => $detalleSolicitud) {
-            $html.="<tr align='center'><td>" . $detalleSolicitud->solicitudes->nombre . "</td><td>" . $detalleSolicitud->cantidad . "</td><td>".$detalleSolicitud->valor."</td></tr>";
+            $html.="<tr align='center'><td>" . $detalleSolicitud->planta->nombre . "</td><td>" . $detalleSolicitud->cantidad . "</td><td>".$detalleSolicitud->valor."</td></tr>";
             $suma+=$detalleSolicitud->valor;
         }
         $html.='<tr id="total" align="center"><td scope="col" colspan="2">TOTAL</td><td scope="col">'.$suma.'</td></tr>

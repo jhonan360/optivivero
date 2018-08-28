@@ -37,6 +37,9 @@ class LoginController extends Controller
         if($request->user()->hasRole('User')){
             return redirect('/');
         }
+        if($request->user()->hasRole('Proveedor')){
+            return redirect('/provider/');
+        }
     }
 
     /**

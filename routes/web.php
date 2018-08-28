@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/prueba', 'ApiController@prueba')->name('prueba');
 
 Route::group(['prefix' => 'admin'], function()
 {
@@ -50,4 +51,8 @@ Route::group(['prefix' => 'admin'], function()
 Route::group(['prefix' => 'user'], function()
 {
 	Route::get('/', 'UserController@inicio')->middleware('auth');
+});
+Route::group(['prefix' => 'provider'], function()
+{
+	Route::get('/', 'ProviderController@inicio')->middleware('auth');
 });
