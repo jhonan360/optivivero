@@ -38,7 +38,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i>Secciones</a>
+                            <a href="/admin/secciones"><i class="fa fa-table fa-fw"></i>Secciones</a>
                         </li>
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i>Reportes</a>

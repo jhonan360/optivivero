@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin'], function()
 	Route::get('/tipoPlanta', 'AdminController@tipoPlanta')->middleware('auth');
 	Route::get('/pedidos', 'AdminController@pedidos')->middleware('auth');
 	Route::get('/proveedores', 'AdminController@proveedores')->middleware('auth');
+	Route::get('/secciones', 'AdminController@secciones')->middleware('auth');
 
 
 	// otros

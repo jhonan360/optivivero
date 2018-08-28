@@ -41,6 +41,10 @@ class AdminController extends Controller
     {
         return view('admin.proveedores');
     }
+    public function secciones()
+    {
+        return view('admin.secciones');
+    }
     public function pedidos()
     {
         $plantas=Plantas::all();
@@ -229,7 +233,7 @@ class AdminController extends Controller
         $file = $request->file('file');
         if ($param=='update') {
             if ($file) {
-                $ruta='/source/img/tipoPlantas/'.$id.'.png';
+                $ruta='source/img/tipoPlantas/'.$id.'.png'; //Ruta de la imagen sin slash
                 file_put_contents($ruta, File::get($file));
                 $query='UPDATE tipoPlanta SET nombre="'.$nombre.'",imagen="'.$ruta.'" WHERE idTipoPlanta="'.$id.'"';
             }else{
