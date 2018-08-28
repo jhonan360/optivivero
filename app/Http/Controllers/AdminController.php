@@ -230,11 +230,15 @@ class AdminController extends Controller
         if ($param=='update') {
             if ($file) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                 $ruta='/source/img/tipoPlantas/'.$id.'.png';
 
 
 
+=======
+                $ruta='source/img/tipoPlantas/'.$id.'.png';
+>>>>>>> 54d7f9f80785af7018f6c5b36b81d47aa6ced5ad
 =======
                 $ruta='source/img/tipoPlantas/'.$id.'.png';
 >>>>>>> 54d7f9f80785af7018f6c5b36b81d47aa6ced5ad
