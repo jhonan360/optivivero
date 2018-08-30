@@ -32,6 +32,6 @@ class HomeController extends Controller
         }
         if($request->user()->hasRole('Proveedor')){
             return redirect('/provider/');
-        }p
+        }
     }
 }
