@@ -25,7 +25,7 @@
                         <label for="nombre">Nombre </label>
                         <input type="text" class="form-control mb-2 mr-sm-2" id="nombre" placeholder="Nombre pedido">
                         <label for="nombre">Proveedor</label>
-                        <select id="selectProveedor" required>
+                        <select id="selectProveedor" onblur="cargarPlantas(this.value)" required>
                             <option value="0">---</option>
                             @foreach ($proveedores as $proveedor)
                                 <option value="{{ $proveedor->idProveedor }}">{{ $proveedor->razonSocial }} -- {{ $proveedor->nit }}</option>
@@ -38,10 +38,7 @@
                             <form id="addPlant">
                                 <label for="selectPlanta">Planta </label>
                                 <select id="selectPlanta" onchange="showValor(this.value)" required>
-                                    <option value="0">---</option>
-                                    @foreach ($plantas as $planta)
-                                        <option value="{{ $planta->idPlanta }}">{{ $planta->nombre }}</option>
-                                    @endforeach
+                                    <option value disabled selected>---</option>
                                 </select>
                                 <label for="cantidad">Cantidad </label>
                                 <input type="number" id="cantidad" placeholder="Cantidad" required>

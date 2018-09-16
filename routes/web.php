@@ -55,4 +55,12 @@ Route::group(['prefix' => 'user'], function()
 Route::group(['prefix' => 'provider'], function()
 {
 	Route::get('/', 'ProviderController@inicio')->middleware('auth');
+	Route::get('/plantas', 'ProviderController@plantas')->middleware('auth');
+	Route::get('/tipoPlanta', 'ProviderController@tipoPlanta')->middleware('auth');
+
+	Route::post('/tablePlantas', 'ProviderController@tablePlantas')->middleware('auth');
+	Route::post('/llenarSelectTipoPlantas', 'ProviderController@llenarSelectTipoPlantas')->middleware('auth');
+	Route::post('/plantaAlmacenar', 'ProviderController@plantaAlmacenar')->middleware('auth');
+	Route::post('/tableTipoPlantas', 'ProviderController@tableTipoPlantas')->middleware('auth');
+	Route::post('/tipoPlantaAlmacenar', 'ProviderController@tipoPlantaAlmacenar')->middleware('auth');
 });

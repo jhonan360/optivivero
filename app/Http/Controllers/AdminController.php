@@ -12,6 +12,7 @@ use App\User;
 use App\Perfilamiento;
 use App\TipoPlanta;
 use App\Plantas;
+use App\PlantasProveedor;
 use App\Proveedores;
 use App\DetalleSolicitud;
 use App\Solicitudes;
@@ -43,7 +44,7 @@ class AdminController extends Controller
     }
     public function pedidos()
     {
-        $plantas=Plantas::all();
+        $plantas=PlantasProveedor::all();
         $proveedores=Proveedores::all();
         return view('admin.pedidos',['plantas' => $plantas,'proveedores' => $proveedores]);
     }

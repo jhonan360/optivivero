@@ -1,6 +1,7 @@
 var plantas = $('#plantas').data('plantas');
 console.log(plantas	);
 var tableContent=[];
+var idProveedor;
 $(document).ready(function()
 {
 	llenarTabla();
@@ -34,7 +35,7 @@ $("#addPlant").on("submit", function(e){
 	var cantidad = $("#cantidad").val();
 	var valorTotal = $("#valor").val()*$("#cantidad").val();
 	var markup = "<tr align='center'><td><input type='checkbox' name='record' id='"+id+"'></td><td>" + nombre + "</td><td>" + cantidad + "</td><td>"+valorTotal+"</td></tr><tr id='total' align='center'><td scope='col' colspan='3'>TOTAL</td><td scope='col'>"+suma+"</td></tr>";
-    $("table tbody").append(markup);
+    $("#tablePlantas").append(markup);
     $("#cantidad").val("");
 	return false;
 });
@@ -170,4 +171,28 @@ function openModal(id)
         }).fail(function(response) {
 			$("#tableModal").html('No se puede cargar el contenido de la tabla');
         });
+}
+function cargarPlantas(id){
+
+    var x = document.getElementById("selectPlanta");
+    $('#selectPlanta').empty()
+
+    this.idProveedor=id
+    var plants=  plantas.filter(getPlantas);
+    console.log(plants);
+    var option = document.createElement("option");
+        option.selected;
+        option.disabled;
+        option.value;
+        option.text = '---';
+        x.add(option);
+    for (var i = 0; i < plants.length; i++) {
+        var option = document.createElement("option");
+        option.value = plants[i].idPlanta;
+        option.text = plants[i].nombre;
+        x.add(option);
+    }
+}
+function getPlantas(planta) {
+    return planta.idProveedor == this.idProveedor
 }
