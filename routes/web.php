@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin'], function()
 	Route::get('/tipoPlanta', 'AdminController@tipoPlanta')->middleware('auth');
 	Route::get('/pedidos', 'AdminController@pedidos')->middleware('auth');
 	Route::get('/proveedores', 'AdminController@proveedores')->middleware('auth');
+	Route::get('/secciones', 'AdminController@secciones')->middleware('auth');
 
 
 	// otros
@@ -44,6 +45,7 @@ Route::group(['prefix' => 'admin'], function()
 	Route::post('/tableSolicitudes', 'AdminController@tableSolicitudes')->middleware('auth');
 	Route::post('/tableProveedores', 'AdminController@tableProveedores')->middleware('auth');
 	Route::post('/proveedorAlmacenar', 'AdminController@proveedorAlmacenar')->middleware('auth');
+	Route::post('/graficaInicio', 'AdminController@graficaInicio')->middleware('auth');
 });
 
 

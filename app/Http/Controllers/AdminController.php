@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Storage;
 use File;
+use stdClass;
 use \Response;
+use App\AlmacenDatos;
 use App\User;
 use App\Perfilamiento;
 use App\TipoPlanta;
@@ -16,6 +18,7 @@ use App\PlantasProveedor;
 use App\Proveedores;
 use App\DetalleSolicitud;
 use App\Solicitudes;
+use App\Secciones;
 use App\EstadosSolicitudes;
 use App\Role;
 
@@ -41,6 +44,10 @@ class AdminController extends Controller
     public function proveedores()
     {
         return view('admin.proveedores');
+    }
+    public function secciones()
+    {
+        return view('admin.secciones');
     }
     public function pedidos()
     {
@@ -230,7 +237,7 @@ class AdminController extends Controller
         $file = $request->file('file');
         if ($param=='update') {
             if ($file) {
-                $ruta='/source/img/tipoPlantas/'.$id.'.png';
+                $ruta='source/img/tipoPlantas/'.$id.'.png'; //Ruta de la imagen sin slash
                 file_put_contents($ruta, File::get($file));
                 $query='UPDATE tipoPlanta SET nombre="'.$nombre.'",imagen="'.$ruta.'" WHERE idTipoPlanta="'.$id.'"';
             }else{
@@ -427,5 +434,42 @@ class AdminController extends Controller
         }
             return Response::json('ok');
     }
+    public function graficaInicio(Request $request)
+    {
+        $fecha=$_POST['fecha'];
+        if ($fecha=='hoy') {
+            $fecha=date("Y-m-d");
+        }
+        $secciones=Secciones::all();
+        $array=[];
+        foreach ($secciones as $key => $seccion) {
+            $countTemp=0;
+            $countHum=0;
+            $sumHum=0;
+            $sumTemp=0;
+
+            $datos=AlmacenDatos::where('created_at',$fecha)->where('idSeccion',$seccion->idSeccion)->get();
+            foreach ($datos as $key => $dato) {
+                 if ($dato->tipo=='humedad') {
+                     $sumHum+=$dato->dato;
+                     $countHum+=1;
+                 }else {
+                     $sumTemp+=$dato->dato;
+                     $countTemp+=1;
+                 }
+             }
+             if ($datos) {
+                $object=new stdClass();
+                $object->y=$fecha." "."cualquier";
+                $object->a=$sumHum/countHum;
+                $object->b=$sumTemp/countTemp;
+                array_push($array,$object);
+              } 
+        }
+        return Response::json(array('dato' => $array));
+
+        
+    }
+
 }
 

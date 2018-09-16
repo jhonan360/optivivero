@@ -151,7 +151,7 @@
                     <div class="col-md-12">
                         <div class="wel_header">
                             <h2>¿ Quienes somos?</h2>
-                            <p>Our Green Fire Organization is one of the non profit organization near you. Get our services like</p>
+                            <p>Somos un grupo de investigacion para la mejora de procesos </p>
                         </div>
                     </div>
                 </div>
