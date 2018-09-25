@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin'], function()
 	Route::post('/tableProveedores', 'AdminController@tableProveedores')->middleware('auth');
 	Route::post('/proveedorAlmacenar', 'AdminController@proveedorAlmacenar')->middleware('auth');
 	Route::post('/graficaInicio', 'AdminController@graficaInicio')->middleware('auth');
+	Route::post('/pedirDatos', 'AdminController@pedirDatos')->middleware('auth');
 });
 
 

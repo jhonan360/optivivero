@@ -6,16 +6,16 @@
         @include('admin.section.leftMenu')
     @endsection
 
-    
+
     @section('style')
     <!-- DataTables CSS -->
     <link href="{{ asset('/vendor/datatables-plugins/dataTables.bootstrap.css')}}" rel="stylesheet">
-	
+
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('/vendor/datatables-responsive/dataTables.responsive.css')}}" rel="stylesheet">
     <link href="{{ asset('/vendor/morrisjs/morris.css')}}" rel="stylesheet">
     @endsection
-	    
+
      @section('content')
     <div class="row">
         <div class="col-lg-12 col-xs-12 text-center">
@@ -27,8 +27,19 @@
         	<div class="panel panel-default">
                 <div class="panel-heading">
                 	<input type="date"  id="fecha" name="fecha">
-                	<button id="filtro" onclick="buscar()" class="btn btn-success"> buscar<i class="fa fa-search"></i></button>
-                  <!-- <option></option> <button></button>--->
+                	<button id="filtro" onclick="grafica()" class="btn btn-success"> buscar<i class="fa fa-search"></i></button>
+                    <form id="formSeccion" method="POST"">
+                        <select id="seccion" name="seccion">
+                            <option disabled value selected > -- seleccione una sección -- </option>
+                            <option value="all"> Todo </option>
+                            @foreach ($secciones as $seccion)
+                            <option value="{{ $seccion->idSeccion }}">
+                                {{ $seccion->nombre }}
+                            </option>
+                            @endforeach
+                        </select>
+                      <input type="submit" class="btn btn-success" value="Capturar">
+                    </form>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -37,7 +48,7 @@
                 <!-- /.panel-body -->
             </div>
  		</div>
-	</div>       
+	</div>
     <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -48,8 +59,8 @@
                                 <tr>
                                     <th scope="col">Fecha Hora</th>
                                     <th scope="col">Secciones</th>
-                                    <th scope="col">Temperatura</th>
-                                    <th scope="col">Humedad</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Dato</th>
                                 </tr>
                             </thead>
                             <tbody>

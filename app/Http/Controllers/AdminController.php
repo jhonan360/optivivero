@@ -27,7 +27,8 @@ class AdminController extends Controller
 {
     public function inicio()
     {
-        return view('admin.inicio');
+        $secciones=Secciones::all();
+        return view('admin.inicio',['secciones' => $secciones]);
     }
     public function usuarios()
     {
@@ -442,33 +443,57 @@ class AdminController extends Controller
         }
         $secciones=Secciones::all();
         $array=[];
+        $select='SELECT almacenDatos.created_at,secciones.nombre,tipo,dato FROM almacenDatos,secciones WHERE almacenDatos.idSeccion=secciones.idSeccion AND DATE(almacenDatos.created_at)='."'".$fecha."'";
+        $table = DB::select($select);
         foreach ($secciones as $key => $seccion) {
             $countTemp=0;
             $countHum=0;
             $sumHum=0;
             $sumTemp=0;
 
-            $datos=AlmacenDatos::where('created_at',$fecha)->where('idSeccion',$seccion->idSeccion)->get();
-            foreach ($datos as $key => $dato) {
-                 if ($dato->tipo=='humedad') {
-                     $sumHum+=$dato->dato;
-                     $countHum+=1;
-                 }else {
-                     $sumTemp+=$dato->dato;
-                     $countTemp+=1;
-                 }
-             }
-             if ($datos) {
-                $object=new stdClass();
-                $object->y=$fecha." "."cualquier";
-                $object->a=$sumHum/countHum;
-                $object->b=$sumTemp/countTemp;
-                array_push($array,$object);
-              } 
-        }
-        return Response::json(array('dato' => $array));
+            $datos=AlmacenDatos::whereDate('created_at',$fecha)->where('idSeccion',$seccion->idSeccion)->get();
 
-        
+            if (count($datos)>0) {
+                foreach ($datos as $key => $dato) {
+                     if ($dato->tipo=='humedad') {
+                         $sumHum+=$dato->dato;
+                         $countHum+=1;
+                     }else {
+                         $sumTemp+=$dato->dato;
+                         $countTemp+=1;
+                     }
+                 }
+                $object=new stdClass();
+                $object->y=$fecha." S. ".$dato->seccion->nombre;
+                $object->a=0;
+                if ($sumHum!=0) {
+                    $object->a=($sumHum/$countHum);
+                }
+                $object->b=0;
+                if ($sumTemp) {
+                    $object->b=($sumTemp/$countTemp);
+                }
+                array_push($array,$object);
+              }
+        }
+        return Response::json(array('dato' => $array,'table' => $table));
+
+
+    }
+    public function pedirDatos(Request $request)
+    {
+        $idSeccion=$_POST['seccion'];
+        if($idSeccion=='all'){
+            $secciones=Secciones::all();
+        }else{
+            $secciones=Secciones::where('idSeccion',$idSeccion)->get();
+        }
+        foreach ($secciones as $key => $seccion) {
+            $seccion->tomarMuestra='true';
+            $seccion->save();
+        }
+        return Response::json(array('html' => $idSeccion));
+
     }
 
 }
