@@ -37,6 +37,7 @@ $("#addPlant").on("submit", function(e){
 	var markup = "<tr align='center'><td><input type='checkbox' name='record' id='"+id+"'></td><td>" + nombre + "</td><td>" + cantidad + "</td><td>"+valorTotal+"</td></tr><tr id='total' align='center'><td scope='col' colspan='3'>TOTAL</td><td scope='col'>"+suma+"</td></tr>";
     $("#tablePlantas").append(markup);
     $("#cantidad").val("");
+    $('#selectProveedor').attr('disabled', 'disabled');
 	return false;
 });
 
@@ -61,6 +62,9 @@ function deleteRow(){
             		$("#total").remove();
             		var suma=sumar();
             		$("table tbody").append("<tr id='total' align='center'><td scope='col' colspan='3'>TOTAL</td><td scope='col'>"+suma+"</td></tr>");
+                    if (tableContent.length==0) {
+                        $('#selectProveedor').removeAttr('disabled');
+                    }
             		return;
 				}
 			}

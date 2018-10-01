@@ -5,7 +5,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Pedidos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/provider/pendientes">Pendientes</a>
+                                    <a href="/provider/">Pendientes</a>
                                 </li>
                                 <li>
                                     <a href="/provider/realizados">Realizados</a>

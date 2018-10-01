@@ -10,12 +10,12 @@
     @section('content')
     	<div class="row" style="margin-top: 1%;">
 	        <div class="col-lg-12 col-xs-12 text-center" style="margin-bottom: 5px;">
-	            <h1>Pedidos Pendientes</h1>
+	            <h1>Pedidos Realizados</h1>
 	        </div>
     	</div>
 	    <div class="row" style="margin-top: 1%;">
 	        <div class="col-lg-12">
-	            <table width="100%" class="table table-striped table-bordered table-hover table-responsive" id="datatablePendientes">
+	            <table width="100%" class="table table-striped table-bordered table-hover table-responsive" id="datatableRealizados">
 	                <thead>
 	                    <tr>
 	                        <th scope="col">Nº</th>
@@ -24,7 +24,7 @@
 	                        <th scope="col">Fecha</th>
 	                        <th scope="col">Cantidad</th>
 	                        <th scope="col">Valor</th>
-	                        <th scope="col">Responder</th>
+	                        <th scope="col">Estado</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
@@ -32,17 +32,6 @@
 	            </table>
 	        </div>
 	    </div>
-
-
-
-
-
-
-
-
-
-
-
 
 <div id="modalPendientes" class="modal fade" role="dialog">
   <div class="modal-dialog" role="document">
@@ -84,7 +73,7 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
-    <script src="{{ asset('js/provider/pendientes.js')}}"></script>
+    <script src="{{ asset('js/provider/realizados.js')}}"></script>
 
     @endsection
 @else

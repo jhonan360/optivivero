@@ -34,7 +34,7 @@ class Solicitudes extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idSolicitud','user_id', 'idProveedor', 'nombre', 'fechaHora', 'cantidadTotal', 'valorTotal', 'observacion1', 'observacion2', 'created_at', 'updated_at'];
+    protected $fillable = ['idSolicitud','user_id', 'idProveedor', 'nombre', 'fechaHora', 'cantidadTotal', 'valorTotal', 'cantidadTotalPagar', 'valorTotalPagar', 'observacion1', 'observacion2', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -65,7 +65,7 @@ class Solicitudes extends Model
      */
     public function entradas()
     {
-        return $this->hasMany('App\Entrada', 'idSolicitud', 'idSolicitud');
+        return $this->hasMany('App\Entradas', 'idSolicitud', 'idSolicitud');
     }
 
     /**
@@ -73,6 +73,6 @@ class Solicitudes extends Model
      */
     public function estadosSolicitudes()
     {
-        return $this->hasMany('App\EstadosSolicitude', 'idSolicitud', 'idSolicitud');
+        return $this->hasMany('App\EstadosSolicitudes', 'idSolicitud', 'idSolicitud');
     }
 }

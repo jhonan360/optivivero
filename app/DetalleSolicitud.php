@@ -26,14 +26,14 @@ class DetalleSolicitud extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idSolicitud','idPlanta','cantidad', 'valor', 'created_at', 'updated_at'];
+    protected $fillable = ['idSolicitud','idPlanta','cantidad', 'valor','cantidadPagar', 'valorPagar', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function planta()
     {
-        return $this->belongsTo('App\Plantas', 'idPlanta', 'idPlanta');
+        return $this->belongsTo('App\PlantasProveedor', 'idPlanta', 'idPlanta');
     }
 
     /**

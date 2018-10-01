@@ -7,7 +7,7 @@ function llenarTabla()
 {
 	$('#datatable').DataTable();
     //Buttons examples
-    var table = $('#datatablePendientes').DataTable({
+    var table = $('#datatableRealizados').DataTable({
         destroy: true,
         responsive: true,
         language: {
@@ -31,13 +31,12 @@ function llenarTabla()
         }
     },
     });
-    var t = $('#datatablePendientes').DataTable();
-
+    var t = $('#datatableRealizados').DataTable();
     t.clear();
 	$.ajax({
 		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		method: "POST",
-		url: "/provider/tablePendientes",
+		url: "/provider/tableRealizados",
 		dataType: 'json',
 		data: {}
 	})
@@ -74,6 +73,23 @@ function openModal(id)
             $("#tableModal").html('No se puede cargar el contenido de la tabla');
         });
 }
+function openModalResponder(id)
+{
+    $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            method: "POST",
+            url: "/provider/formResponderSolicitud",
+            dataType: 'json',
+            data: { id: id}
+            })
+        .done(function(response){
+            $("#formResponder").html(response.html);
+            $("#titleModal").html('<h4 id="titleModal" class="modal-title">Pedido '+response.solicitud.nombre+'</h4>');
+        }).fail(function(response) {
+            $("#tableModal").html('No se puede cargar el contenido de la tabla');
+        });
+}
+
 function openModalResponder(id)
 {
     $.ajax({
