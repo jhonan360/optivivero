@@ -62,9 +62,9 @@
                             <div class="collapse navbar-collapse zero_mp" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav navbar-right main_menu">
                                     <li class="active"><a href="#header">Inicio<span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#about">¿Quienes somos?</a></li>
-                                    <li><a href="#portfolio">Mision</a></li>
-                                    <li><a href="#counter">Vision</a></li>
+                                    <li><a href="#welcome">¿Quienes somos?</a></li>
+                                    <li><a href="#volunteer">Mision</a></li>
+                                    <li><a href="#blog">Vision</a></li>
                                     <li><a href="{{ route('login') }}">iniciar sesion</a></li>
                                 </ul>
                             </div>
@@ -114,8 +114,8 @@
                             <div class="carousel-caption">
                                 <div class="slider_text">
                                     <h3>OPTI VIVERO</h3>
-                                    <h2>nature the environment</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <h2>Mejora de procesos</h2>
+                                    <p>En base a las variables ambientales recolectadas</p>
                                     
                                 </div>
                             </div>
@@ -127,10 +127,9 @@
                             <img src="/source/img/home/carro3.png" alt="...">
                             <div class="carousel-caption">
                                 <div class="slider_text">
-                                    <h3>Protect</h3>
-                                    <h2>nature the environment</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    <a href="" class="custom_btn">Read  More</a>
+                                    <h3>Opti vivero</h3>
+                                    <h2>Adaptabilidad a su vivero</h2>
+                                    <p>Parametrizable segun la cantidad de secciones y plantas en el predio</p>
                                 </div>
                             </div>
                         </div>
@@ -151,63 +150,51 @@
                     <div class="col-md-12">
                         <div class="wel_header">
                             <h2>¿ Quienes somos?</h2>
-                            <p>Somos un grupo de investigacion para la mejora de procesos </p>
+                            <p>Somos un grupo de investigacion para la mejora de procesos en minorias con enfoque en agroecologia</p>
                         </div>
                     </div>
                 </div>
                 <!--End of row-->
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="item">
                             <div class="single_item">
                                 <div class="item_list">
                                     <div class="welcome_icon">
                                         <i class="fa fa-leaf"></i>
                                     </div>
-                                    <h4>eco system</h4>
-                                    <p>Lorem ipsum dolor sit amet, eu qui modo expetendis reformidans ex sit set appetere sententiae seo eum in simul homero.</p>
+                                    <h4>ecosistema</h4>
+                                    <p>Comprometidos con el cuidado del medio ambiente y la inclusion de nuevas tecnologias de bajo costo para aquellos que se les dificulta obtenerlas de ultima generacion.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--End of col-md-3-->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="item">
                             <div class="single_item">
                                 <div class="item_list">
                                     <div class="welcome_icon">
                                         <i class="fa fa-refresh"></i>
                                     </div>
-                                    <h4>recycling</h4>
-                                    <p>Lorem ipsum dolor sit amet, eu qui modo expetendis reformidans ex sit set appetere sententiae seo eum in simul homero.</p>
+                                    <h4>Retroalimentacion</h4>
+                                    <p>"El cliente siempre tiene la razon", basados en esta frase celebre es importante la experiencia que tienen con nuestro sistema para mejorar y brindar un mejor servicio.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--End of col-md-3-->
-                    <div class="col-md-3">
-                        <div class="item">
-                            <div class="single_item">
-                                <div class="item_list">
-                                    <div class="welcome_icon">
-                                        <i class="fa fa-tint"></i>
-                                    </div>
-                                    <h4>water refine</h4>
-                                    <p>Lorem ipsum dolor sit amet, eu qui modo expetendis reformidans ex sit set appetere sententiae seo eum in simul homero.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!--End of col-md-3-->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="item">
                             <div class="single_item">
                                 <div class="item_list">
                                     <div class="welcome_icon">
                                         <i class="fa fa-cog"></i>
                                     </div>
-                                    <h4>solar system</h4>
-                                    <p>Lorem ipsum dolor sit amet, eu qui modo expetendis reformidans ex sit set appetere sententiae seo eum in simul homero.</p>
+                                    <h4>Configuracion</h4>
+                                    <p>Cada cliente tiene un tipo de vivero diferente, por lo tanto se parametrizara de acuerdo al producto que se maneja y segun las variables ambientales que se pueden observar</p>
                                 </div>
                             </div>
                         </div>
@@ -226,10 +213,10 @@
         <section id="volunteer">
             <div class="container">
                 <div class="row vol_area">
-                    <div class="col-md-8">
-                        <div class="volunteer_content">
-                            <h3>Mis<span>ión</span></h3>
-                            <p>Join Our Team And Help the world. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur.</p>
+                    <div class="col-md-10">
+                        <div  class="volunteer_content" >
+                            <h3 >Mis<span>ión</span></h3>
+                            <p>somos una propuesta de innovacion para todas aquellas minorias dedicadas a la produccion de flora que no tienen acceso a tecnologias de ultima generacion, con el compromiso de crear elementos alternativos y altamente eficientes ayudando a la mejora de la calidad del producto. </p>
                         </div>
                     </div>
                     <!--End of col-md-8-->
@@ -242,299 +229,9 @@
         <!--end of volunteer-->
 
 
-        <!--Start of counter-->
-        <section id="counter">
-            <div class="counter_img_overlay">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="counter_header">
-                                <h2>OUR achivement</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!--End of col-md-12-->
-                    </div>
-                    <!--End of row-->
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="counter_item text-center">
-                                <div class="sigle_counter_item">
-                                    <img src="img/tree.png" alt="">
-                                    <div class="counter_text">
-                                        <span class="counter">1542</span>
-                                        <p>tree cut</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="counter_item text-center">
-                                <div class="sigle_counter_item">
-                                    <img src="img/hand.png" alt="">
-                                    <div class="counter_text">
-                                        <span class="counter">1458</span>
-                                        <p>animal lost</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="counter_item text-center">
-                                <div class="sigle_counter_item">
-                                    <img src="img/tuhnder.png" alt="">
-                                    <div class="counter_text">
-                                        <span class="counter">9854</span>
-                                        <p>blubs collected</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="counter_item text-center">
-                                <div class="sigle_counter_item">
-                                    <img src="img/cloud.png" alt="">
-                                    <div class="counter_text">
-                                        <span class="counter">5412</span>
-                                        <p>water level</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of row-->
-                </div>
-                <!--End of container-->
-            </div>
-        </section>
-        <!--end of counter-->
-
-
-
         <!--start of event-->
-        <section id="event">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="event_header text-center">
-                            <h2>latest event</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                </div>
-                <!--End of row-->
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-6 zero_mp">
-                                <div class="event_item">
-                                    <div class="event_img">
-                                        <img src="img/tree_cut_1.jpg" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 zero_mp">
-                                <div class="event_item">
-                                    <div class="event_text text-center">
-                                        <a href=""><h4>One Tree Thousand Hope</h4></a>
-                                        <h6>15-16 May in Dhaka</h6>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adip scing elit. Lorem ipsum dolor sit amet,consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="" class="event_btn">read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--End of row-->
-                        <div class="row">
-                            <div class="col-md-6 zero_mp">
-                                <div class="event_item">
-                                    <div class="event_text text-center">
-                                        <a href=""><h4>One Tree Thousand Hope</h4></a>
-                                        <h6>15-16 May in Dhaka</h6>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adip scing elit. Lorem ipsum dolor sit amet,consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="" class="event_btn">read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 zero_mp">
-                                <div class="event_item">
-                                    <div class="event_img">
-                                        <img src="img/tree_cut_2.jpg" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--End of row-->
-                    </div>
-                    <!--End of col-md-8-->
-                    <div class="col-md-4">
-                        <div class="event_news">
-                            <div class="event_single_item fix">
-                                <div class="event_news_img floatleft">
-                                    <img src="img/tree_cut_3.jpg" alt="">
-                                </div>
-                                <div class="event_news_text">
-                                    <a href="#"><h4>Let’s plant 200 tree each...</h4></a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, veniam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="event_news">
-                            <div class="event_single_item fix">
-                                <div class="event_news_img floatleft">
-                                    <img src="img/tree_cut_4.jpg" alt="">
-                                </div>
-                                <div class="event_news_text">
-                                    <a href="#"><h4>Keep your house envirome..</h4></a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, veniam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="event_news">
-                            <div class="event_single_item fix">
-                                <div class="event_news_img floatleft">
-                                    <img src="img/tree_cut_3.jpg" alt="">
-                                </div>
-                                <div class="event_news_text">
-                                    <a href="#"><h4>Urgent Clothe Needed Needed</h4></a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, veniam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="event_news">
-                            <div class="event_single_item fix">
-                                <div class="event_news_img floatleft">
-                                    <img src="img/tree_cut_4.jpg" alt="">
-                                </div>
-                                <div class="event_news_text">
-                                    <a href="#"><h4>One Tree Thousand Hope</h4></a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, veniam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="event_news">
-                            <div class="event_single_item fix">
-                                <div class="event_news_img floatleft">
-                                    <img src="img/tree_cut_3.jpg" alt="">
-                                </div>
-                                <div class="event_news_text">
-                                    <a href="#"><h4>One Tree Thousand Hope</h4></a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, veniam.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of col-md-4-->
-                </div>
-                <!--End of row-->
-            </div>
-            <!--End of container-->
-        </section>
+
         <!--end of event-->
-
-
-
-        <!--Start of testimonial-->
-        <section id="testimonial">
-            <div class="testimonial_overlay">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="testimonial_header text-center">
-                                <h2>testimonials</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of row-->
-                    <section id="carousel">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
-                                        <!-- Carousel indicators -->
-                                        <ol class="carousel-indicators">
-                                            <li data-target="#fade-quote-carousel" data-slide-to="0" class="active"></li>
-                                            <li data-target="#fade-quote-carousel" data-slide-to="1"></li>
-                                        </ol>
-                                        <!-- Carousel items -->
-                                        <div class="carousel-inner">
-                                            <div class="active item">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="profile-circle">
-                                                            <img src="img/tree_cut_3.jpg" alt="">
-                                                        </div>
-                                                        <div class="testimonial_content">
-                                                            <i class="fa fa-quote-left"></i>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
-                                                        </div>
-                                                        <div class="testimonial_author">
-                                                            <h5>Sadequr Rahman Sojib</h5>
-                                                            <p>CEO, Fourder</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="profile-circle">
-                                                            <img src="img/tree_cut_3.jpg" alt="">
-                                                        </div>
-                                                        <div class="testimonial_content">
-                                                            <i class="fa fa-quote-left"></i>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
-                                                        </div>
-                                                        <div class="testimonial_author">
-                                                            <h5>Sadequr Rahman Sojib</h5>
-                                                            <p>CEO, Fourder</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--End of item with active-->
-                                            <div class="item">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="profile-circle">
-                                                            <img src="img/tree_cut_3.jpg" alt="">
-                                                        </div>
-                                                        <div class="testimonial_content">
-                                                            <i class="fa fa-quote-left"></i>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
-                                                        </div>
-                                                        <div class="testimonial_author">
-                                                            <h5>Sadequr Rahman Sojib</h5>
-                                                            <p>CEO, Fourder</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="profile-circle">
-                                                            <img src="img/tree_cut_3.jpg" alt="">
-                                                        </div>
-                                                        <div class="testimonial_content">
-                                                            <i class="fa fa-quote-left"></i>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
-                                                        </div>
-                                                        <div class="testimonial_author">
-                                                            <h5>Sadequr Rahman Sojib</h5>
-                                                            <p>CEO, Fourder</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--ENd of item-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End of row-->
-                        </div>
-                        <!--End of container-->
-                    </section>
-                    <!--End of carousel-->
-                </div>
-            </div>
-            <!--End of container-->
-        </section>
-        <!--end of testimonial-->
 
 
 
@@ -544,100 +241,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="latest_blog text-center">
-                            <h2>latest blog</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo cum libero vitae quos eaque commodi.</p>
+                            <h2>VISIÓN</h2>
+                            <p>Pretendemos incluir tecnologicamente todas aquellas minorias que tienen recursos limitados en el area agroecologico de Colombia, para asi disminuir el analfabetismo digital creando herramientas y software de innovacion.</p>
+                            <a class=" text-center" href="#"><img src="/source/img/home/logo.png" alt=""></a>
                         </div>
                     </div>
                 </div>
                 <!--End of row-->
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="blog_news">
-                            <div class="single_blog_item">
-                                <div class="blog_img">
-                                    <img src="img/climate_effect.jpg" alt="">
-                                </div>
-                                <div class="blog_content">
-                                    <a href=""><h3>Climate change is affecting bird migration</h3></a>
-                                    <div class="expert">
-                                        <div class="left-side text-left">
-                                            <p class="left_side">
-                                                <span class="clock"><i class="fa fa-clock-o"></i></span>
-                                                <span class="time">Aug 19, 2016</span>
-                                                <a href=""><span class="admin"><i class="fa fa-user"></i> Admin</span></a>
-                                            </p>
-                                            <p class="right_side text-right">
-                                                <a href=""><span class="right_msg text-right"><i class="fa fa-comments-o"></i></span>
-                                                    <span class="count">0</span></a>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <p class="blog_news_content">Lorem ipsum dolor sit amet, consectetur adipscing elit. Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. consectetur Lorem ipsum dolor sitamet, conse ctetur adipiscing elit. </p>
-                                    <a href="" class="blog_link">read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of col-md-4-->
-                    <div class="col-md-4">
-                        <div class="blog_news">
-                            <div class="single_blog_item">
-                                <div class="blog_img">
-                                    <img src="img/air_pollutuon.jpg" alt="">
-                                </div>
-                                <div class="blog_content">
-                                    <a href=""><h3>How to avoid indoor air pollution?</h3></a>
-                                    <div class="expert">
-                                        <div class="left-side text-left">
-                                            <p class="left_side">
-                                                <span class="clock"><i class="fa fa-clock-o"></i></span>
-                                                <span class="time">Aug 19, 2016</span>
-                                                <a href=""><span class="admin"><i class="fa fa-user"></i> Admin</span></a>
-                                            </p>
-                                            <p class="right_side text-right">
-                                                <a href=""><span class="right_msg text-right"><i class="fa fa-comments-o"></i></span>
-                                                    <span class="count">0</span></a>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <p class="blog_news_content">Lorem ipsum dolor sit amet, consectetur adipscing elit. Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. consectetur Lorem ipsum dolor sitamet, conse ctetur adipiscing elit. </p>
-                                    <a href="" class="blog_link">read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of col-md-4-->
-                    <div class="col-md-4">
-                        <div class="blog_news">
-                            <div class="single_blog_item">
-                                <div class="blog_img">
-                                    <img src="img/threat_bear.jpg" alt="">
-                                </div>
-                                <div class="blog_content">
-                                    <a href=""><h3>Threat to Yellowstone’s grizzly bears.</h3></a>
-                                    <div class="expert">
-                                        <div class="left-side text-left">
-                                            <p class="left_side">
-                                                <span class="clock"><i class="fa fa-clock-o"></i></span>
-                                                <span class="time">Aug 19, 2016</span>
-                                                <a href=""><span class="admin"><i class="fa fa-user"></i> Admin</span></a>
-                                            </p>
-                                            <p class="right_side text-right">
-                                                <a href=""><span class="right_msg text-right"><i class="fa fa-comments-o"></i></span>
-                                                    <span class="count">0</span></a>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <p class="blog_news_content">Lorem ipsum dolor sit amet, consectetur adipscing elit. Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. consectetur Lorem ipsum dolor sitamet, conse ctetur adipiscing elit. </p>
-                                    <a href="" class="blog_link">read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of col-md-4-->
                 </div>
                 <!--End of row-->
             </div>
@@ -646,44 +256,7 @@
         <!-- end of blog-->
 
         <!--Start of Market-->
-        <section id="market">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="market_area text-center">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="market_logo">
-                                        <a href=""><img src="img/audiojungle.png" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="market_logo">
-                                        <a href=""><img src="img/codecanyon.png" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="market_logo">
-                                        <a href=""><img src="img/graphicriver.png" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="market_logo">
-                                        <a href=""><img src="img/audiojungle.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End of row-->
-                        </div>
-                        <!--End of market Area-->
-                    </div>
-                    <!--End of col-md-12-->
-                </div>
-                <!--End of row-->
-            </div>
-            <!--End of container-->
-        </section>
-        <!--End of market-->
+        
 
         <!--Start of footer-->
         <section id="footer">
@@ -727,47 +300,7 @@
         </script>
 
         <!--Gmaps-->
-        <script src="js/gmaps.min.js"></script>
-        <script type="text/javascript">
-            var map;
-            $(document).ready(function () {
-                map = new GMaps({
-                    el: '#map',
-                    lat: 23.6911078,
-                    lng: 90.5112799,
-                    zoomControl: true,
-                    zoomControlOpt: {
-                        style: 'SMALL',
-                        position: 'LEFT_BOTTOM'
-                    },
-                    panControl: false,
-                    streetViewControl: false,
-                    mapTypeControl: false,
-                    overviewMapControl: false,
-                    scrollwheel: false,
-                });
-
-
-                map.addMarker({
-                    lat: 23.6911078,
-                    lng: 90.5112799,
-                    title: 'Office',
-                    details: {
-                        database_id: 42,
-                        author: 'Foysal'
-                    },
-                    click: function (e) {
-                        if (console.log)
-                            console.log(e);
-                        alert('You clicked in this marker');
-                    },
-                    mouseover: function (e) {
-                        if (console.log)
-                            console.log(e);
-                    }
-                });
-            });
-        </script>
+        
         <!--Google Maps API-->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjxvF9oTfcziZWw--3phPVx1ztAsyhXL4"></script>
 
