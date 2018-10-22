@@ -8,16 +8,16 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Inventario<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Entradas</a>
+                                    <a href="/admin/entradas">Entradas</a>
                                 </li>
                                 <li>
                                     <a href="/admin/pedidos">Pedido</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Salidas</a>
+                                    <a href="/admin/salidas">Salidas</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Ventas</a>
+                                    <a href="/admin/ventas">Ventas</a>
                                 </li>
                                 <li>
                                     <a href="/admin/proveedores">Proveedores</a>

@@ -29,6 +29,8 @@ Route::group(['prefix' => 'admin'], function()
 	Route::get('/pedidos', 'AdminController@pedidos')->middleware('auth');
 	Route::get('/proveedores', 'AdminController@proveedores')->middleware('auth');
 	Route::get('/secciones', 'AdminController@secciones')->middleware('auth');
+	Route::get('/entradas', 'AdminController@entradas')->middleware('auth');
+	Route::get('/salidas', 'AdminController@salidas')->middleware('auth');
 
 
 	// otros
@@ -47,6 +49,10 @@ Route::group(['prefix' => 'admin'], function()
 	Route::post('/proveedorAlmacenar', 'AdminController@proveedorAlmacenar')->middleware('auth');
 	Route::post('/graficaInicio', 'AdminController@graficaInicio')->middleware('auth');
 	Route::post('/pedirDatos', 'AdminController@pedirDatos')->middleware('auth');
+	Route::post('/tableEntradas', 'AdminController@tableEntradas')->middleware('auth');
+	Route::post('/modalEntradas', 'AdminController@modalEntradas')->middleware('auth');
+	Route::post('/responderEntradas', 'AdminController@responderEntradas')->middleware('auth');
+	Route::post('/tableSalidas', 'AdminController@modalSalidas')->middleware('auth');
 });
 
 
@@ -72,4 +78,5 @@ Route::group(['prefix' => 'provider'], function()
 	Route::post('/formResponderSolicitud', 'ProviderController@formResponderSolicitud')->middleware('auth');
 	Route::post('/pendienteAlmacenar', 'ProviderController@pendienteAlmacenar')->middleware('auth');
 	Route::post('/tableRealizados', 'ProviderController@tableRealizados')->middleware('auth');
+
 });

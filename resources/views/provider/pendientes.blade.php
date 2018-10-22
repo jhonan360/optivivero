@@ -68,7 +68,7 @@
         <h4 id="titleModal" class="modal-title"></h4>
       </div>
       <div class="modal-body" style="overflow-y: scroll;height: auto;">
-		<form id="formResponder" method="POST" enctype="multipart/form-data" class="form-inline">
+		<form id="formResponderEntrada" method="POST" enctype="multipart/form-data" class="form-inline">
 		</form>
       </div>
       <div class="modal-footer">

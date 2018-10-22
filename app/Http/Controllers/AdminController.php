@@ -10,6 +10,7 @@ use File;
 use stdClass;
 use \Response;
 use App\AlmacenDatos;
+use App\Entradas;
 use App\User;
 use App\Perfilamiento;
 use App\TipoPlanta;
@@ -17,10 +18,13 @@ use App\Plantas;
 use App\PlantasProveedor;
 use App\Proveedores;
 use App\DetalleSolicitud;
+use App\DetalleSalida;
+use App\DetalleEntradas;
 use App\Solicitudes;
 use App\Secciones;
 use App\EstadosSolicitudes;
 use App\Role;
+use App\Salidas;
 
 
 class AdminController extends Controller
@@ -50,11 +54,21 @@ class AdminController extends Controller
     {
         return view('admin.secciones');
     }
+    public function entradas()
+    {
+        return view('admin.entradas');
+    }
     public function pedidos()
     {
         $plantas=PlantasProveedor::all();
         $proveedores=Proveedores::all();
         return view('admin.pedidos',['plantas' => $plantas,'proveedores' => $proveedores]);
+    }
+    public function salidas()
+    {
+        $salidas=Salidas::all();
+        $detalleSalida=DetalleSalida::all();
+        return view('admin.salidas',['salidas' => $salidas,'detalleSalida' => $detalleSalida]);
     }
     public function tableUser(Request $request)
     {
@@ -310,7 +324,6 @@ class AdminController extends Controller
 
         }
         return Response::json(array('html' => $array,'matriz'=>$arrayDetalle));
-
     }
     public function tableSolicitudes(Request $request)
     {
@@ -493,8 +506,158 @@ class AdminController extends Controller
             $seccion->save();
         }
         return Response::json(array('html' => $idSeccion));
-
     }
-
+    public function tableEntradas(Request $request)
+    {
+        $array=[];
+        $arrayDetalle=[];
+        $solicitudes=Solicitudes::whereHas('EstadosSolicitudes', function ($query) {
+            $query->where('estado', 'Respondido');
+        })->get();
+        foreach ($solicitudes as $key => $solicitud) {
+            $btn='<button class="btn btn-success" data-toggle="modal" data-target="#modalPedido"  onclick="openModal('."'".$solicitud->idSolicitud."'".')"><i class="fa fa-eye"></i></button>';
+            $btn2='<button class="btn btn-success" data-toggle="modal" data-target="#modalPedidoResponder"  onclick="openModal2('."'".$solicitud->idSolicitud."'".')"><i class="fa fa-eye"></i></button>';
+            $estado=EstadosSolicitudes::where('idSolicitud',$solicitud->idSolicitud)->orderby('created_at','desc')->first();
+            array_push($array,array(($key+1).' '.$btn,$solicitud->proveedor->razonSocial,$solicitud->user->perfilamiento->nombres,$solicitud->nombre,$solicitud->fechaHora,$solicitud->cantidadTotalPagar,$solicitud->valorTotalPagar,$estado->estado));
+            array_push($arrayDetalle,array(DetalleSolicitud::where('idSolicitud',$solicitud->idSolicitud)->get()));
+        }
+        return Response::json(array('html' => $array,'matriz'=>$arrayDetalle));
+    }
+    public function modalEntradas(Request $request)
+    {
+        $idSolicitud=$_POST['id'];
+        $solicitud=Solicitudes::where('idSolicitud',$idSolicitud)->first();
+        $detalleSolicitudes=DetalleSolicitud::where('idSolicitud',$idSolicitud)->get();
+        $suma=0;
+        $html='<div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover table-responsive" id="tablePlantasModal">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cantidad Anterior</th>
+                                        <th scope="col">Cantidad A Entregar</th>
+                                        <th scope="col">Valor Anterior</th>
+                                        <th scope="col">Valor </th>
+                                        <th scope="col">Precio De Venta </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+        ';
+        foreach ($detalleSolicitudes as $key => $detalleSolicitud) {
+            $html.="<tr align='center'><td>" . $detalleSolicitud->planta->nombre . "</td><td>" . $detalleSolicitud->cantidad. "</td><td>".$detalleSolicitud->cantidadPagar."</td><td>" . $detalleSolicitud->valor. "</td><td>".$detalleSolicitud->valorPagar."</td>";
+            $planta = Plantas::where('nombre','like','%'.$detalleSolicitud->planta->nombre.'%')->first();
+            if ($planta==null) {
+                $html.='<td> <input type="number" name="'.$detalleSolicitud->idPlanta.'" id="'.$detalleSolicitud->idPlanta.'" required></td></tr>';
+            }else{
+                $html.='<td></td></tr>';
+            }
+            $suma+=$detalleSolicitud->valorPagar;
+        }
+        $html.='<tr id="total" align="center"><td scope="col" colspan="4">TOTAL</td><td scope="col">'.$suma.'</td><td></td></tr>
+            </tbody>
+            </table>
+            <br>
+            <label>Observación Pedido</label>
+            <textarea rows="6" id="observacion" style="width: 100%;" disabled>'.$solicitud->observacion1.'</textarea>
+            <label>Respuesta</label>
+            <textarea rows="6"  style="width: 100%;" disabled>'.$solicitud->observacion2.'</textarea>
+            <label>Observación Entrada</label>
+            <textarea rows="6" id="observacion" style="width: 100%;"></textarea>
+            <input id="id" name="id" style="display:none;" value="'.$idSolicitud.'">
+            <div class="text-center"><input type="submit" id="confirmarPedido" class="btn btn-success" value="Confirmar Entrada"></div>
+          </div>';
+        return Response::json(array('html' => $html,'solicitud'=>$solicitud));
+    }
+    public function responderEntradas(Request $request)
+    {
+        $idSolicitud=$_POST['id'];
+        $observacion=$_POST['observacion'];
+        $array=$_POST['array'];
+        $solicitud=Solicitudes::where('idSolicitud',$idSolicitud)->first();
+        $detalleSolicitudes=DetalleSolicitud::where('idSolicitud',$idSolicitud)->get();
+        $plantas=Plantas::all();
+        $plantasNombre=[];
+        foreach ($plantas as $key => $planta) {
+            array_push($plantasNombre,strtoupper($planta->nombre));
+        }
+        $entrada = new Entradas;
+        $entrada->idSolicitud=$idSolicitud;
+        $entrada->user_id=Auth::user()->id;
+        $entrada->fechaHora=Date('Y-m-d H:i:s');
+        $entrada->cantidadTotal=0;
+        $entrada->valorTotal=0;
+        $entrada->observacion=$observacion;
+        $entrada->save();
+        $cantidadTotal=0;
+        $valorTotal=0;
+        foreach ($detalleSolicitudes as $key => $detalle) {
+            $cantidadTotal+=$detalle->cantidad;
+            $valorTotal+=$detalle->valor;
+            if (in_array(strtoupper($detalle->planta->nombre), $plantasNombre)) {
+                $planta = Plantas::where('nombre','like','%'.$detalle->planta->nombre.'%')->first();
+                $detalleEntrada= new DetalleEntradas;
+                $detalleEntrada->idPlanta=$planta->idPlanta;
+                $detalleEntrada->idEntrada=$entrada->idEntrada;
+                $detalleEntrada->cantidad=$detalle->cantidad;
+                $detalleEntrada->valor=$detalle->valor;
+                $detalleEntrada->save();
+                $planta->cantidad+=$detalle->cantidad;
+                $planta->save();
+            }else{
+                $plantaP= PlantasProveedor::where('nombre','like','%'.$detalle->planta->nombre.'%')->first();
+                $tipoP=TipoPlanta::where('nombre',$plantaP->tipoPlanta->nombre)->first();
+                if ($tipoP==null) {
+                    $tipoP = new TipoPlanta;
+                    $tipoP->nombre=$plantaP->tipoPlanta->nombre;
+                    $tipoP->save();
+                }
+                $planta = new Plantas;
+                $planta->idTipoPlanta=$tipoP->idTipoPlanta;
+                $planta->nombre=$detalle->planta->nombre;
+                $planta->cantidad=$detalle->cantidad;
+                foreach ($array as $key => $a) {
+                    if ($a['name']==$detalle->idPlanta) {
+                        $planta->valor=$a['value'];
+                    }
+                }
+                $planta->save();
+                $detalleEntrada= new DetalleEntradas;
+                $detalleEntrada->idPlanta=$planta->idPlanta;
+                $detalleEntrada->idEntrada=$entrada->idEntrada;
+                $detalleEntrada->cantidad=$detalle->cantidad;
+                $detalleEntrada->valor=$detalle->valor;
+                $detalleEntrada->save();
+                $planta->cantidad+=$detalle->cantidad;
+                $planta->save();
+            }
+        }
+        $entrada->cantidadTotal=$cantidadTotal;
+        $entrada->valorTotal=$valorTotal;
+        $entrada->save();
+        $estado=EstadosSolicitudes::where('idSolicitud',$solicitud->idSolicitud)->first();
+        $estado->estado='Finalizado';
+        $estado->save();
+        return Response::json(array('html' => 'ok'));
+    }
+    public function modalSalidas(Request $request)
+    {
+        $idSalida=$_POST['id'];
+        $detalleSalidas=DetalleSalida::where('idSalidas',$idSalida)->get();
+        $html='<div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover table-responsive" id="tableSalidasModal">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Planta</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+        ';
+        foreach ($detalleSalidas as $key => $detalleSalida) {
+            $html.="<tr align='center'><td>" . $detalleSalida->planta->nombre . "</td><td>" . $detalleSalida->cantidad. "</td><td>".$detalleSalida->valor."</td>";
+        }
+        return Response::json(array('html' => $html));
+    }
 }
 
