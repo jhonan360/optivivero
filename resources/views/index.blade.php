@@ -215,8 +215,8 @@
                 <div class="row vol_area">
                     <div class="col-md-10">
                         <div  class="volunteer_content" >
-                            <h3 >Mis<span>ión</span></h3>
-                            <p>somos una propuesta de innovacion para todas aquellas minorias dedicadas a la produccion de flora que no tienen acceso a tecnologias de ultima generacion, con el compromiso de crear elementos alternativos y altamente eficientes ayudando a la mejora de la calidad del producto. </p>
+                            <h3 >vi<span>sión</span></h3>
+                            <p>Ser una organizacion lider de innovacion, soluciones, productos y servicios agroecologicos a nivel nacional. siendo reconocida por la calidad de nuestros productos y contribucion hacia la comunidad brindando atencion personalizada. </p>
                         </div>
                     </div>
                     <!--End of col-md-8-->
@@ -241,8 +241,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="latest_blog text-center">
-                            <h2>VISIÓN</h2>
-                            <p>Pretendemos incluir tecnologicamente todas aquellas minorias que tienen recursos limitados en el area agroecologico de Colombia, para asi disminuir el analfabetismo digital creando herramientas y software de innovacion.</p>
+                            <h2>MISION</h2>
+                            <p>Innovar para todas aquellas minorias dedicadas a la produccion de flora que no tienen acceso a tecnologias de ultima generacion, con el compromiso de crear elementos alternativos y altamente eficientes ayudando a la mejora de la calidad, un sitio web acorde a la especialidad, adaptacion de los usuarios a la tecnologia.
+                            </p>
                             <a class=" text-center" href="#"><img src="/source/img/home/logo.png" alt=""></a>
                         </div>
                     </div>
