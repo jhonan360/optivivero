@@ -29,7 +29,7 @@ class Plantas extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idPlanta','idTipoPlanta', 'nombre', 'cantidad', 'valor', 'created_at', 'updated_at'];
+    protected $fillable = ['idTipoPlanta', 'nombre', 'cantidad', 'valor', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -34,7 +34,7 @@
                 </thead>
                 <tbody>
                     @forelse ($salidas as $key => $salida)
-                        <tr align="center">
+                        <tr>
                             <td>{{ $salida->idSalidas }}</td>
                             <td>{{ $salida->fechaHora }}</td>
                             <td>{{ $salida->user->perfilamiento->nombres }} {{ $salida->user->perfilamiento->apellidos }}</td>

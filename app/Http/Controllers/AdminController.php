@@ -70,12 +70,6 @@ class AdminController extends Controller
         $detalleSalida=DetalleSalida::all();
         return view('admin.salidas',['salidas' => $salidas,'detalleSalida' => $detalleSalida]);
     }
-    public function ventas()
-    {
-        $plantas=Plantas::all();
-        $detalleSalida=DetalleSalida::all();
-        return view('admin.ventas',['plantas' => $plantas,'detalleSalida' => $detalleSalida]);
-    }
     public function tableUser(Request $request)
     {
     	$array=[];
