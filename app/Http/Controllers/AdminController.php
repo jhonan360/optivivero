@@ -70,12 +70,6 @@ class AdminController extends Controller
         $detalleSalida=DetalleSalida::all();
         return view('admin.salidas',['salidas' => $salidas,'detalleSalida' => $detalleSalida]);
     }
-    public function ventas()
-    {
-        $plantas=Plantas::all();
-        $detalleSalida=DetalleSalida::all();
-        return view('admin.ventas',['plantas' => $plantas,'detalleSalida' => $detalleSalida]);
-    }
     public function tableUser(Request $request)
     {
     	$array=[];
@@ -664,6 +658,39 @@ class AdminController extends Controller
             $html.="<tr align='center'><td>" . $detalleSalida->planta->nombre . "</td><td>" . $detalleSalida->cantidad. "</td><td>".$detalleSalida->valor."</td>";
         }
         return Response::json(array('html' => $html));
+    }
+    public function pagarVenta(Request $request)
+    {
+        $valorTotal=$_POST['valorTotal'];
+        $dinero=$_POST['dinero'];
+        $tableContent=$_POST['tableContent'];
+        $cantidadTotal=0;
+        //$valorTotal=0;
+        for ($i=0; $i <count($tableContent); $i++) {
+            $cantidadTotal+=$tableContent[$i]['cantidad'];
+           // $valorTotal+=$tableContent[$i]['valor'];
+        }
+        $salida= new Salidas;
+        $salida->user_id=Auth::user()->id;
+        $salida->fechaHora=Date('Y-m-d H:i:s');
+        $salida->cantidadTotal=$cantidadTotal;
+        $salida->valorTotal=$valorTotal;
+        $salida->dinero=$dinero;
+        $salida->save();
+        $idSalidas=$salida->idSalidas;
+        for ($i=0; $i <count($tableContent); $i++) {
+            $detalleSalida= new DetalleSalida;
+            $detalleSalida->idSalidas=$idSalidas;
+            $detalleSalida->idPlanta=$tableContent[$i]['id'];
+            $detalleSalida->cantidad=$tableContent[$i]['cantidad'];
+            $detalleSalida->valor=$tableContent[$i]['valor'];
+            $detalleSalida->save();
+            $planta=Plantas::where('idPlanta',$tableContent[$i]['id'])->first();
+            $planta->cantidad-=$tableContent[$i]['cantidad'];
+            $planta->save();
+        }
+
+        return Response::json('ok');
     }
 }
 

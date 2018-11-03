@@ -31,8 +31,6 @@ Route::group(['prefix' => 'admin'], function()
 	Route::get('/secciones', 'AdminController@secciones')->middleware('auth');
 	Route::get('/entradas', 'AdminController@entradas')->middleware('auth');
 	Route::get('/salidas', 'AdminController@salidas')->middleware('auth');
-	Route::get('/ventas', 'AdminController@ventas')->middleware('auth');
-
 
 	// otros
 	Route::post('/tableUser', 'AdminController@tableUser')->middleware('auth');
@@ -54,6 +52,7 @@ Route::group(['prefix' => 'admin'], function()
 	Route::post('/modalEntradas', 'AdminController@modalEntradas')->middleware('auth');
 	Route::post('/responderEntradas', 'AdminController@responderEntradas')->middleware('auth');
 	Route::post('/tableSalidas', 'AdminController@modalSalidas')->middleware('auth');
+	Route::post('/pagarVenta', 'AdminController@pagarVenta')->middleware('auth');
 });
 
 
