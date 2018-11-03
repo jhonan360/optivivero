@@ -31,10 +31,7 @@ Route::group(['prefix' => 'admin'], function()
 	Route::get('/secciones', 'AdminController@secciones')->middleware('auth');
 	Route::get('/entradas', 'AdminController@entradas')->middleware('auth');
 	Route::get('/salidas', 'AdminController@salidas')->middleware('auth');
-<<<<<<< HEAD
-=======
-
->>>>>>> 9aafa1ac522911b99e9b56cec0b615de49d4385f
+	Route::get('/ventas', 'AdminController@ventas')->middleware('auth');
 
 	// otros
 	Route::post('/tableUser', 'AdminController@tableUser')->middleware('auth');
