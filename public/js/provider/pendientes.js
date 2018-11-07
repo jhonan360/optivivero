@@ -1,3 +1,4 @@
+var aux;
 $(document).ready(function()
 {
 	llenarTabla();
@@ -84,15 +85,17 @@ function openModalResponder(id)
             data: { id: id}
             })
         .done(function(response){
-            $("#formResponder").html(response.html);
-            $("#titleModal").html('<h4 id="titleModal" class="modal-title">Pedido '+response.solicitud.nombre+'</h4>');
+            $("#formResponderEntrada").html(response.html);
+            console.log(response.solicitud);
+             aux=response.solicitud;
+            $("#titleModal2").html('<h4 id="titleModal" class="modal-title">Pedido '+response.solicitud.nombre+'</h4>');
         }).fail(function(response) {
             $("#tableModal").html('No se puede cargar el contenido de la tabla');
         });
 }
 
 
-$("#formResponder").on("submit", function(e){
+$("#formResponderEntrada").on("submit", function(e){
     console.log( $( this ).serializeArray() );
     e.preventDefault();
     var array=$( this ).serializeArray();

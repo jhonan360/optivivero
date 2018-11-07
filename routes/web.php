@@ -54,14 +54,27 @@ Route::group(['prefix' => 'admin'], function()
 	Route::post('/responderEntradas', 'AdminController@responderEntradas')->middleware('auth');
 	Route::post('/tableSalidas', 'AdminController@modalSalidas')->middleware('auth');
 	Route::post('/pagarVenta', 'AdminController@pagarVenta')->middleware('auth');
+	Route::post('/seccionAlmacenar', 'AdminController@seccionAlmacenar')->middleware('auth');
+	Route::post('/tableSeccion', 'AdminController@tableSeccion')->middleware('auth');
 });
 
 
 
 Route::group(['prefix' => 'user'], function()
 {
-	Route::get('/', 'UserController@inicio')->middleware('auth');
+	Route::get('/', 'AdminController@inicio')->middleware('auth');
+
+	Route::get('/plantas', 'AdminController@plantas')->middleware('auth');
+	Route::get('/tipoPlanta', 'AdminController@tipoPlanta')->middleware('auth');
+	Route::get('/pedidos', 'AdminController@pedidos')->middleware('auth');
+	Route::get('/proveedores', 'AdminController@proveedores')->middleware('auth');
+	Route::get('/secciones', 'AdminController@secciones')->middleware('auth');
+	Route::get('/entradas', 'AdminController@entradas')->middleware('auth');
+	Route::get('/salidas', 'AdminController@salidas')->middleware('auth');
+	Route::get('/ventas', 'AdminController@ventas')->middleware('auth');
+
 });
+
 Route::group(['prefix' => 'provider'], function()
 {
 	Route::get('/', 'ProviderController@inicio')->middleware('auth');

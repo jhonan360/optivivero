@@ -65,7 +65,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 id="titleModal" class="modal-title"></h4>
+        <h4 id="titleModal2" class="modal-title"></h4>
       </div>
       <div class="modal-body" style="overflow-y: scroll;height: auto;">
 		<form id="formResponderEntrada" method="POST" enctype="multipart/form-data" class="form-inline">
