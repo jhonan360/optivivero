@@ -1,4 +1,4 @@
-@if(auth()->user()->hasRole('Admin'))
+@if(auth()->user()->hasRole('Admin')||auth()->user()->hasRole('User'))
 
     @extends('layouts.base')
 
@@ -24,17 +24,18 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             <button class="btn-success" data-toggle="modal" data-target="#modalUsuarios" type="button" onclick="modal()">Crear seccion</button>
+                             <button class="btn-success" data-toggle="modal" data-target="#modalSeccion" type="button" onclick="modal()">Crear seccion</button>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover table-responsive" id="datatablesecciones">
+                            <table width="100%" class="table table-striped table-bordered table-hover table-responsive" id="datatableSecciones">
                                 <thead>
                                     <tr>
                                         <th scope="col">Nombre  de la seccion</th>
+                                        <th scope="col">Tipo Planta</th>
                                         <th scope="col">Espacio total</th>
-                                        <th scope="col">Observacion</th>
-                                        
+                                        <th scope="col">Observación</th>
+                                        <th scope="col">Editar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,7 +45,7 @@
                   </div>
             </div>
         </div>
-<div id="modalUsuarios" class="modal fade" role="dialog">
+<div id="modalSeccion" class="modal fade" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -52,26 +53,23 @@
         <h4 id="titleModal" class="modal-title"></h4>
       </div>
       <div class="modal-body" style="overflow-y: scroll;height: 400px;">
-            <form id="formUsuario" method="POST" enctype="multipart/form-data" >
+            <form id="formSeccion" method="POST" enctype="multipart/form-data" >
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Ingrese el correo del usuario" required>
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese la contraseña" required>
-                        <label for="repetirPassword">Repertir Password</label>
-                        <input type="password" class="form-control" id="repetirPassword" name="repetirPassword" placeholder="Ingrese el correo del usuario" required>
-                        <label for="cedula">Cedula</label>
-                        <input type="number" class="form-control" id="cedula" name="cedula" placeholder="Ingrese la cedula" required>
-                        <label for="nombres">Nombres</label>
-                        <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese los nombres" required>
-                        <label for="apellidos">Apellidos</label>
-                        <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingrese los apellidos" required>
-                        <label for="telefono">Teléfono</label>
-                        <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingrese teléfono" required>
-                        <label for="direccion">Dirección</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección de residencia">
-                        <label for="file"    class="control-label">Fotografia</label>
-                        <input type="file" accept="image/*" name="file" id="file" onchange="extension();">
+                        <input type="hidden" id="id" name="id">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
+                        <label for="tipoPlanta">Tipo Planta</label>
+                        <select id="tipoPlanta" class="form-control" name="tipoPlanta" required>
+                            <option disabled value selected > -- seleccione un tipo de planta -- </option>
+                            @foreach($tipoPlantas as $tipoPlanta)
+                                <option value="{{$tipoPlanta->idTipoPlanta}}" @if($tipoPlanta->idTipoPlanta == old('tipoPlanta')) selected @endif>{{$tipoPlanta->nombre}}</option>
+                            @endforeach
+                        </select>
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la catidad" required>
+                        <label for="observacion">Observación</label>
+                        <textarea type="text" class="form-control" id="observacion" name="observacion" placeholder="Ingrese la observación" rows="5" required> </textarea>
+
                     </div>
                    <div class="text-center">
                      <input id="btnModal1" class="btn btn-success" type="submit">
@@ -92,7 +90,7 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
-    <script src="{{ asset('js/admin/usuarios.js')}}"></script>
+    <script src="{{ asset('js/admin/seccion.js')}}"></script>
 
     @endsection
 

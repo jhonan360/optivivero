@@ -52,7 +52,8 @@ class AdminController extends Controller
     }
     public function secciones()
     {
-        return view('admin.secciones');
+        $tipoPlantas=TipoPlanta::all();
+        return view('admin.secciones')->with('tipoPlantas', $tipoPlantas);
     }
     public function entradas()
     {
@@ -108,7 +109,6 @@ class AdminController extends Controller
 
     	}
     	return Response::json(array('html' => $array));
-
     }
     public function estadoUsuario(Request $request)
     {
@@ -555,7 +555,7 @@ class AdminController extends Controller
             if ($planta==null) {
                 $html.='<td> <input type="number" name="'.$detalleSolicitud->idPlanta.'" id="'.$detalleSolicitud->idPlanta.'" required></td></tr>';
             }else{
-                $html.='<td></td></tr>';
+                $html.='<td>'.$planta->valor.'</td></tr>';
             }
             $suma+=$detalleSolicitud->valorPagar;
         }
@@ -698,5 +698,43 @@ class AdminController extends Controller
 
         return Response::json('ok');
     }
-}
 
+    public function seccionAlmacenar(Request $request)
+    {
+        ini_set('memory_limit', '1000M');
+        set_time_limit(50);
+        $id=$_POST['id'];
+        $param=$_POST['param'];
+        $nombre=$_POST['nombre'];
+        $idtipoPlanta=$_POST['tipoPlanta'];
+        $cantidad=$_POST['cantidad'];
+        $observacion=$_POST['observacion'];
+        if ($param=='update') {
+            $seccion=Secciones::where('idSeccion',$id)->first();
+            $query='UPDATE secciones SET nombre="'.$nombre.'",espacioTotal="'.$cantidad.'",observacion="'.$observacion.'",idTipoPlanta="'.$idtipoPlanta.'" WHERE idSeccion="'.$id.'"';
+            DB::connection()->getPdo()->exec($query);
+        }else{
+            $seccion = new Secciones;
+            $seccion->idTipoPlanta=$idtipoPlanta;
+            $seccion->nombre=$nombre;
+            $seccion->espacioTotal=$cantidad;
+            $seccion->observacion=$observacion;
+            $seccion->save();
+        }
+        return Response::json('ok');
+    }
+    public function tableSeccion(Request $request)
+    {
+        $array=[];
+        $html='';
+        $secciones=Secciones::all();
+        foreach ($secciones as $key => $seccion) {
+            $b=' <button class="btn btn-warning" style="margin-top: 2%; margin-bottom: 5%;" data-toggle="modal" data-target="#modalSeccion" type="button" onclick="modal';
+            $b.="('".$seccion->idSeccion."','".$seccion->idTipoPlanta."','".$seccion->nombre."','".$seccion->espacioTotal."','".$seccion->observacion."')".'">';
+            $b.='<i class="fa fa-pencil"></i></button>';
+            array_push($array,array(
+                $seccion->nombre,$seccion->tipoPlanta->nombre,$seccion->espacioTotal,$seccion->observacion,$b));
+        }
+        return Response::json(array('html' => $array));
+    }
+}

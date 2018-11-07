@@ -43,9 +43,6 @@
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i>Reportes</a>
                         </li>
-                        <li>
-                            <a href="/admin/usuarios"><i class="fa fa-user fa-fw"></i> Usuario</a>
-                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

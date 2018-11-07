@@ -91,7 +91,7 @@ $("#formResponderEntrada").on("submit", function(e){
             })
         .done(function(response){
             llenarTabla();
-            $('#modalResponder').modal('toggle');
+            $('#modalPedido').modal('toggle');
         }).fail(function(response) {
             alert('No se confirmo la entrada');
         });
