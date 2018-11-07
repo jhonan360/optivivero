@@ -25,7 +25,7 @@
                 <button id="irPagar" disabled  class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalPagar" onclick="openModal()">Pagar <i class="fa fa-money"></i></button>
             </div>
             <div class="col-lg-8 col-md-8 col-xs-12">
-                <input type="text" name="totalPagar" id="totalPagar" style="width: 100%; height: 150px" readonly>
+                <input type="text" name="totalPagar" id="totalPagar" style="width: 100%; height: 100px; font-size: -webkit-xxx-large; text-align: -webkit-center;" readonly>
             </div>
         </div>
         <hr>
@@ -90,11 +90,11 @@
             <form id="formPagar" method="POST" enctype="multipart/form-data" >
                 <div class="col-md-12 col-lg-12 col-xs-12">
                     <h3 >Total Pagar</h3>
-                    <input type="number" name="totalPagarModal" id="totalPagarModal" style="width: 100%; height: 150px" readonly>
+                    <input type="number" name="totalPagarModal" id="totalPagarModal" style="width: 100%; height: 90px; font-size: -webkit-xxx-large; text-align: -webkit-center" readonly>
                 </div>
                 <div class="col-md-12 col-lg-12 col-xs-12">
                     <h3 >Dinero</h3>
-                    <input type="number" name="dinero" id="dinero" style="width: 100%; height: 150px" required=>
+                    <input type="number" name="dinero" id="dinero" style="width: 100%; height: 90px; font-size: -webkit-xxx-large; text-align: -webkit-center;" required=>
                 </div>
 
                <div class="text-center" style="margin-top: 10px;">
