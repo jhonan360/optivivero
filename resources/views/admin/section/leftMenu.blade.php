@@ -42,7 +42,7 @@
                             <a href="/admin/secciones"><i class="fa fa-table fa-fw"></i>Secciones</a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i>Reportes</a>
+                            <a href="/admin/reportes"><i class="fa fa-table fa-fw"></i>Reportes</a>
                         </li>
                         <li>
                             <a href="/admin/usuarios"><i class="fa fa-user fa-fw"></i> Usuario</a>
