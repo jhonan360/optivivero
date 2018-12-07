@@ -51,6 +51,10 @@ class AdminController extends Controller
     {
         return view('admin.proveedores');
     }
+    public function reportes()
+    {
+        return view('admin.reportes');
+    }
     public function secciones()
     {
         $tipoPlantas=TipoPlanta::all();

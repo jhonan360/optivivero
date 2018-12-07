@@ -26,7 +26,9 @@ class Secciones extends Model
     /**
      * @var array
      */
+
     protected $fillable = ['idTipoPlanta', 'nombre','espacioTotal', 'observacion', 'tomarMuestra','valvula','valvulaBoton','tempMax','vacio', 'created_at', 'updated_at'];
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

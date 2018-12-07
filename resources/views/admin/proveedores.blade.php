@@ -117,9 +117,9 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" placeholder="Ingrese el correo del usuario" required>
-                        <label for="password">Password</label>
+                        <label for="password">Contraseña</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese la contraseña" required>
-                        <label for="repetirPassword">Repertir Password</label>
+                        <label for="repetirPassword">Repertir Contraseña</label>
                         <input type="password" class="form-control" id="repetirPassword" name="repetirPassword" placeholder="Ingrese el correo del usuario" required>
                         <label for="nit">Nit</label>
                         <input type="number" class="form-control" id="nit" name="nit" placeholder="Ingrese la nit" required>

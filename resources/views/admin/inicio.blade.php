@@ -26,20 +26,64 @@
         <div class="col-lg-12">
         	<div class="panel panel-default">
                 <div class="panel-heading">
-                	<input type="date"  id="fecha" name="fecha">
-                	<button id="filtro" onclick="grafica()" class="btn btn-success"> buscar<i class="fa fa-search"></i></button>
-                    <form id="formSeccion" method="POST"">
-                        <select id="seccion" name="seccion">
-                            <option disabled value selected > -- seleccione una sección -- </option>
-                            <option value="all"> Todo </option>
-                            @foreach ($secciones as $seccion)
-                            <option value="{{ $seccion->idSeccion }}">
-                                {{ $seccion->nombre }}
-                            </option>
-                            @endforeach
-                        </select>
-                      <input type="submit" class="btn btn-success" value="Capturar">
-                    </form>
+
+                	<div class="row">
+                		<div class="col-xs-4" >
+				 			<label for="seccion">Buscar</label>
+                		</div>
+                		<div class="col-xs-4 ">
+				 			<label for="seccion">Captura Por Sección</label>
+                		</div>
+                		<div class="col-xs-4 ">
+				 			<label for="seccion">Abrir Valvulas</label>
+                		</div>
+
+                	</div>
+                	<div class="row">
+                		<div class="col-xs-4" >
+		                	<input type="date"  id="fecha" name="fecha">
+		                	<button id="filtro" onclick="grafica()" class="btn btn-success"> buscar<i class="fa fa-search"></i></button>
+	                	</div>
+                		<div class="col-xs-4" >
+		                    <form id="formSeccion" method="POST"">
+		                        <select id="seccion" name="seccion">
+		                            <option disabled value selected > -- seleccione una sección -- </option>
+		                            <option value="all"> Todo </option>
+		                            @foreach ($secciones as $seccion)
+		                            <option value="{{ $seccion->idSeccion }}">
+		                                {{ $seccion->nombre }}
+		                            </option>
+		                            @endforeach
+		                        </select>
+		                      <input type="submit" class="btn btn-success" value="Capturar">
+		                    </form>
+	                	</div>
+            	 		<div class="col-xs-4">
+				 			<form id="valula" action="/valvula" method="POST">
+				 				@csrf
+				 				<select id="seccion" name="seccion">
+				                            <option disabled value selected > -- seleccione una sección -- </option>
+				            
+				                            @foreach ($secciones as $seccion)
+				                            <option value="{{ $seccion->idSeccion }}">
+				                                {{ $seccion->nombre }} -- 
+				                               	@if($seccion->valvula==0&&$seccion->valvulaBoton==0)
+				                               		Apagado
+				                               	@else
+				                               		Encendido
+				                           		
+				                           		@endif
+				                            </option>
+
+				                            @endforeach
+				                        </select>
+				                 <input type="submit" class="btn btn-success" value="Riego">
+				              </form>
+				 		</div>
+                	</div>
+
+                    
+                    
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
