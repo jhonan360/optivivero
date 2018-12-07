@@ -18,6 +18,7 @@ use App\Plantas;
 use App\PlantasProveedor;
 use App\Proveedores;
 use App\DetalleSolicitud;
+use App\DetalleSecciones;
 use App\DetalleSalida;
 use App\DetalleEntradas;
 use App\Solicitudes;
@@ -640,10 +641,89 @@ class AdminController extends Controller
         $entrada->cantidadTotal=$cantidadTotal;
         $entrada->valorTotal=$valorTotal;
         $entrada->save();
+        $mensaje="";
+        $detalleEntradas= DetalleEntradas::where('idEntrada',$entrada->idEntrada)->get();
+                   // var_dump(count($detalleEntradas));exit();
+
+        foreach ($detalleEntradas as $key => $dentrada) {
+            $testigo=true;
+            $cantidad=$dentrada->cantidad;
+            $cantidadDis=0;
+
+            $secciones=Secciones::where('vacio','true')->Where('idTipoPlanta',$dentrada->planta->idTipoPlanta)->get();
+            $mensaje.=" Iteracion".$key." cantidad ".$cantidad." secciones".count($secciones);
+            foreach ($secciones as $key2 => $seccion) {
+
+                if($cantidad>0){
+                    $cantidadRealPlanta = DB::select("SELECT SUM(cantidad) As 'count'  FROM detallesecciones WHERE idSeccion='".$seccion->idSeccion."' AND idPlanta='".$dentrada->idPlanta."' GROUP by idSeccion");
+                    if ($cantidadRealPlanta==null) {
+                        $cantidadRealPlanta=0;
+                    }else{
+                        $cantidadRealPlanta=$cantidadRealPlanta[0]->count;
+
+                    }
+                    $cantidadRealSeccion = DB::select("SELECT SUM(cantidad) AS 'count' FROM detallesecciones WHERE idSeccion='".$seccion->idSeccion."'GROUP by idSeccion");
+                    if ($cantidadRealSeccion!=null) {
+                        $cantidadRealSeccion=$cantidadRealSeccion[0]->count;
+                        $cantidadDis=$seccion->espacioTotal-$cantidadRealSeccion;
+                    }else{
+                        $cantidadDis=$seccion->espacioTotal;
+                    }
+                    $mensaje.=" Iteracion".$key." ".$key2;
+
+                    $detalleS=DetalleSecciones::where('idPlanta',$dentrada->idPlanta)->where('idSeccion',$seccion->idSeccion)->first();
+                    if ($cantidadDis>=$cantidad) {
+                        /*DetalleSecciones::updateOrCreate(
+                            ['idPlanta'=>$dentrada->idPlanta,'idSeccion'=>$seccion->idSeccion,'cantidad'=>$cantidadRealPlanta+$cantidad]
+                        );*/
+                        if ($detalleS!=null) {
+                            $detalleS->cantidad=$cantidadRealPlanta+$cantidad;
+                            $detalleS->save();
+                        }else{
+                            DetalleSecciones::Create(
+                            ['idPlanta'=>$dentrada->idPlanta,'idSeccion'=>$seccion->idSeccion,'cantidad'=>$cantidadRealPlanta+$cantidad]
+                            );
+                        }
+                        if ($cantidadDis==$cantidad) {
+                            $cantidad=0;
+                            $seccion->vacio='false';
+                            $seccion->save();
+                        }else{
+                            $cantidad-=$cantidadDis;
+                        }
+                        //falta colocar fecha de actualizacion
+                    }else{
+                        /*DetalleSecciones::updateOrCreate(
+                            [
+                                'idPlanta'=>$dentrada->idPlanta,'idSeccion'=>$seccion->idSeccion,'cantidad'=>$cantidadRealPlanta+$cantidadDis
+                            ]
+                        );*/
+                        if ($detalleS!=null) {
+                            $detalleS->cantidad=$cantidadRealPlanta+$cantidadDis;
+                            $detalleS->save();
+
+                        }else{
+                            DetalleSecciones::Create(
+                                [
+                                'idPlanta'=>$dentrada->idPlanta,'idSeccion'=>$seccion->idSeccion,'cantidad'=>$cantidadRealPlanta+$cantidadDis
+                                ]
+                            );
+                        }
+                        $cantidad-=$cantidadDis;
+                    }
+                    //dd($cantidad);
+                    //if ($cantidad==0) {
+                        //talvez aca se edita seccion
+                        //var_dump(" break ");exit();
+                        //break;
+                    //}
+                }
+            }
+        }
         $estado=EstadosSolicitudes::where('idSolicitud',$solicitud->idSolicitud)->first();
         $estado->estado='Finalizado';
         $estado->save();
-        return Response::json(array('html' => 'ok'));
+        return Response::json(array('html' => $mensaje));
     }
     public function modalSalidas(Request $request)
     {

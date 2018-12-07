@@ -23,7 +23,7 @@ class DetalleSecciones extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cantidad'];
+    protected $fillable = ['idPlanta','idSeccion','cantidad'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
