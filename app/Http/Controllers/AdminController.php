@@ -467,7 +467,7 @@ class AdminController extends Controller
         }
         $secciones=Secciones::all();
         $array=[];
-        $select='SELECT almacenDatos.created_at,secciones.nombre,tipo,dato FROM almacenDatos,secciones WHERE almacenDatos.idSeccion=secciones.idSeccion AND DATE(almacenDatos.created_at)='."'".$fecha."'";
+        $select='SELECT almacenDatos.created_at,secciones.nombre,tipo,dato FROM almacenDatos,secciones WHERE almacenDatos.idSeccion=secciones.idSeccion AND DATE(almacenDatos.created_at)='."'".$fecha."' ORDER BY almacenDatos.created_at DESC"   ;
         $table = DB::select($select);
         foreach ($secciones as $key => $seccion) {
             $countTemp=0;
