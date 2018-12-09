@@ -206,8 +206,10 @@ class AdminController extends Controller
             $b.="('".$planta->idPlanta."','".$planta->idTipoPlanta."','".$planta->nombre."','".$planta->cantidad."','".$planta->valor."')".'">';
             $b.='<i class="fa fa-pencil"></i></button>';
 
-            array_push($array,array(
-                $planta->idPlanta,$planta->tipoPlanta->nombre,$planta->nombre,$planta->cantidad,'$'.$planta->valor,$b));
+            $c=money_format('%.0n',$planta->valor);
+
+            //array_push($array,array($planta->idPlanta,$planta->tipoPlanta->nombre,$planta->nombre,$planta->cantidad,'$'.$planta->valor,$b));
+            array_push($array,array($planta->idPlanta,$planta->tipoPlanta->nombre,$planta->nombre,$planta->cantidad,$c,$b));
 
         }
         return Response::json(array('html' => $array));
@@ -520,6 +522,7 @@ class AdminController extends Controller
     }
     public function tableEntradas(Request $request)
     {
+        setlocale(LC_MONETARY, 'en_US.UTF-8');
         $array=[];
         $arrayDetalle=[];
         $solicitudes=Solicitudes::whereHas('EstadosSolicitudes', function ($query) {
@@ -529,13 +532,14 @@ class AdminController extends Controller
             $btn='<button class="btn btn-success" data-toggle="modal" data-target="#modalPedido"  onclick="openModal('."'".$solicitud->idSolicitud."'".')"><i class="fa fa-eye"></i></button>';
             $btn2='<button class="btn btn-success" data-toggle="modal" data-target="#modalPedidoResponder"  onclick="openModal2('."'".$solicitud->idSolicitud."'".')"><i class="fa fa-eye"></i></button>';
             $estado=EstadosSolicitudes::where('idSolicitud',$solicitud->idSolicitud)->orderby('created_at','desc')->first();
-            array_push($array,array(($key+1).' '.$btn,$solicitud->proveedor->razonSocial,$solicitud->user->perfilamiento->nombres,$solicitud->nombre,$solicitud->fechaHora,$solicitud->cantidadTotalPagar,$solicitud->valorTotalPagar,$estado->estado));
+            array_push($array,array(($key+1).' '.$btn,$solicitud->proveedor->razonSocial,$solicitud->user->perfilamiento->nombres,$solicitud->nombre,$solicitud->fechaHora,$solicitud->cantidadTotalPagar,money_format('%.0n',$solicitud->valorTotalPagar),$estado->estado));
             array_push($arrayDetalle,array(DetalleSolicitud::where('idSolicitud',$solicitud->idSolicitud)->get()));
         }
         return Response::json(array('html' => $array,'matriz'=>$arrayDetalle));
     }
     public function modalEntradas(Request $request)
     {
+        setlocale(LC_MONETARY, 'en_US.UTF-8');
         $idSolicitud=$_POST['id'];
         $solicitud=Solicitudes::where('idSolicitud',$idSolicitud)->first();
         $detalleSolicitudes=DetalleSolicitud::where('idSolicitud',$idSolicitud)->get();
@@ -555,16 +559,16 @@ class AdminController extends Controller
                                 <tbody>
         ';
         foreach ($detalleSolicitudes as $key => $detalleSolicitud) {
-            $html.="<tr align='center'><td>" . $detalleSolicitud->planta->nombre . "</td><td>" . $detalleSolicitud->cantidad. "</td><td>".$detalleSolicitud->cantidadPagar."</td><td>" . $detalleSolicitud->valor. "</td><td>".$detalleSolicitud->valorPagar."</td>";
+            $html.="<tr align='center'><td>" . $detalleSolicitud->planta->nombre . "</td><td>" . $detalleSolicitud->cantidad. "</td><td>".$detalleSolicitud->cantidadPagar."</td><td>" . money_format('%.0n',$detalleSolicitud->valor). "</td><td>".money_format('%.0n',$detalleSolicitud->valorPagar)."</td>";
             $planta = Plantas::where('nombre','like','%'.$detalleSolicitud->planta->nombre.'%')->first();
             if ($planta==null) {
                 $html.='<td> <input type="number" name="'.$detalleSolicitud->idPlanta.'" id="'.$detalleSolicitud->idPlanta.'" required></td></tr>';
             }else{
-                $html.='<td>'.$planta->valor.'</td></tr>';
+                $html.='<td>'.money_format('%.0n',$planta->valor).'</td></tr>';
             }
             $suma+=$detalleSolicitud->valorPagar;
         }
-        $html.='<tr id="total" align="center"><td scope="col" colspan="4">TOTAL</td><td scope="col">'.$suma.'</td><td></td></tr>
+        $html.='<tr id="total" align="center"><td scope="col" colspan="4">TOTAL</td><td scope="col">'.money_format('%.0n',$suma).'</td><td></td></tr>
             </tbody>
             </table>
             <br>
@@ -602,8 +606,8 @@ class AdminController extends Controller
         $cantidadTotal=0;
         $valorTotal=0;
         foreach ($detalleSolicitudes as $key => $detalle) {
-            $cantidadTotal+=$detalle->cantidad;
-            $valorTotal+=$detalle->valor;
+            $cantidadTotal+=$detalle->cantidadPagar;
+            $valorTotal+=$detalle->valorPagar;
             if (in_array(strtoupper($detalle->planta->nombre), $plantasNombre)) {
                 $planta = Plantas::where('nombre','like','%'.$detalle->planta->nombre.'%')->first();
                 $detalleEntrada= new DetalleEntradas;
@@ -635,10 +639,10 @@ class AdminController extends Controller
                 $detalleEntrada= new DetalleEntradas;
                 $detalleEntrada->idPlanta=$planta->idPlanta;
                 $detalleEntrada->idEntrada=$entrada->idEntrada;
-                $detalleEntrada->cantidad=$detalle->cantidad;
-                $detalleEntrada->valor=$detalle->valor;
+                $detalleEntrada->cantidad=$detalle->cantidadPagar;
+                $detalleEntrada->valor=$detalle->valorPagar;
                 $detalleEntrada->save();
-                $planta->cantidad+=$detalle->cantidad;
+                $planta->cantidad+=$detalle->cantidadPagar;
                 $planta->save();
             }
         }
@@ -647,8 +651,6 @@ class AdminController extends Controller
         $entrada->save();
         $mensaje="";
         $detalleEntradas= DetalleEntradas::where('idEntrada',$entrada->idEntrada)->get();
-                   // var_dump(count($detalleEntradas));exit();
-
         foreach ($detalleEntradas as $key => $dentrada) {
             $testigo=true;
             $cantidad=$dentrada->cantidad;
@@ -681,8 +683,7 @@ class AdminController extends Controller
                             ['idPlanta'=>$dentrada->idPlanta,'idSeccion'=>$seccion->idSeccion,'cantidad'=>$cantidadRealPlanta+$cantidad]
                         );*/
                         if ($detalleS!=null) {
-                            $detalleS->cantidad=$cantidadRealPlanta+$cantidad;
-                            $detalleS->save();
+                            $detalleS=DetalleSecciones::where('idPlanta',$dentrada->idPlanta)->where('idSeccion',$seccion->idSeccion)->update(['cantidad' => $cantidadRealPlanta+$cantidad]);
                         }else{
                             DetalleSecciones::Create(
                             ['idPlanta'=>$dentrada->idPlanta,'idSeccion'=>$seccion->idSeccion,'cantidad'=>$cantidadRealPlanta+$cantidad]
@@ -703,9 +704,7 @@ class AdminController extends Controller
                             ]
                         );*/
                         if ($detalleS!=null) {
-                            $detalleS->cantidad=$cantidadRealPlanta+$cantidadDis;
-                            $detalleS->save();
-
+                            $detalleS=DetalleSecciones::where('idPlanta',$dentrada->idPlanta)->where('idSeccion',$seccion->idSeccion)->update(['cantidad' => $cantidadRealPlanta+$cantidadDis]);
                         }else{
                             DetalleSecciones::Create(
                                 [
@@ -769,6 +768,8 @@ class AdminController extends Controller
         $salida->save();
         $idSalidas=$salida->idSalidas;
         for ($i=0; $i <count($tableContent); $i++) {
+            $cantidad=$tableContent[$i]['cantidad'];
+            $idPlanta=$tableContent[$i]['id'];
             $detalleSalida= new DetalleSalida;
             $detalleSalida->idSalidas=$idSalidas;
             $detalleSalida->idPlanta=$tableContent[$i]['id'];
@@ -776,8 +777,26 @@ class AdminController extends Controller
             $detalleSalida->valor=$tableContent[$i]['valor'];
             $detalleSalida->save();
             $planta=Plantas::where('idPlanta',$tableContent[$i]['id'])->first();
-            $planta->cantidad-=$tableContent[$i]['cantidad'];
+            $planta->cantidad-=$cantidad;
             $planta->save();
+            $secciones=Secciones::Where('idTipoPlanta',$planta->idTipoPlanta)->get();
+            //var_dump($secciones);exit();
+            foreach ($secciones as $key => $seccion) {
+                $detallesS=DetalleSecciones::where('idSeccion',$seccion->idSeccion)->where('idPlanta',$idPlanta)->where('cantidad','>',0)->get();
+                foreach ($detallesS as $key => $detalleS) {
+                    if($cantidad>=0){
+                        if ($detalleS->cantidad>=$cantidad) {
+                            DetalleSecciones::where('idSeccion',$seccion->idSeccion)->where('idPlanta',$idPlanta)->update(['cantidad' => $detalleS->cantidad-$cantidad]);
+                        }else{
+                            DetalleSecciones::where('idSeccion',$seccion->idSeccion)->where('idPlanta',$idPlanta)->update(['cantidad' => 0]);
+                            $cantidad-=$detalleS->cantidad;
+                        }
+                        $seccion->vacio='true';
+                        $seccion->save();
+                    }
+                }
+            }
+
         }
 
         return Response::json('ok');
@@ -793,9 +812,10 @@ class AdminController extends Controller
         $idtipoPlanta=$_POST['tipoPlanta'];
         $cantidad=$_POST['cantidad'];
         $observacion=$_POST['observacion'];
+        $tempMax=$_POST['tempMax'];
         if ($param=='update') {
             $seccion=Secciones::where('idSeccion',$id)->first();
-            $query='UPDATE secciones SET nombre="'.$nombre.'",espacioTotal="'.$cantidad.'",observacion="'.$observacion.'",idTipoPlanta="'.$idtipoPlanta.'" WHERE idSeccion="'.$id.'"';
+            $query='UPDATE secciones SET nombre="'.$nombre.'",espacioTotal="'.$cantidad.'",observacion="'.$observacion.'",idTipoPlanta="'.$idtipoPlanta.'", tempMax="'.$tempMax.'" WHERE idSeccion="'.$id.'"';
             DB::connection()->getPdo()->exec($query);
         }else{
             $seccion = new Secciones;
@@ -803,6 +823,7 @@ class AdminController extends Controller
             $seccion->nombre=$nombre;
             $seccion->espacioTotal=$cantidad;
             $seccion->observacion=$observacion;
+            $seccion->tempMax=$tempMax;
             $seccion->save();
         }
         return Response::json('ok');
@@ -814,10 +835,10 @@ class AdminController extends Controller
         $secciones=Secciones::all();
         foreach ($secciones as $key => $seccion) {
             $b=' <button class="btn btn-warning" style="margin-top: 2%; margin-bottom: 5%;" data-toggle="modal" data-target="#modalSeccion" type="button" onclick="modal';
-            $b.="('".$seccion->idSeccion."','".$seccion->idTipoPlanta."','".$seccion->nombre."','".$seccion->espacioTotal."','".$seccion->observacion."')".'">';
+            $b.="('".$seccion->idSeccion."','".$seccion->idTipoPlanta."','".$seccion->nombre."','".$seccion->espacioTotal."','".$seccion->observacion."','".$seccion->tempMax."')".'">';
             $b.='<i class="fa fa-pencil"></i></button>';
             array_push($array,array(
-                $seccion->nombre,$seccion->tipoPlanta->nombre,$seccion->espacioTotal,$seccion->observacion,$b));
+                $seccion->nombre,$seccion->tipoPlanta->nombre,$seccion->espacioTotal,$seccion->observacion,$seccion->tempMax.'ºC',$b));
         }
         return Response::json(array('html' => $array));
     }

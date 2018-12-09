@@ -248,7 +248,6 @@ class ProviderController extends Controller
         foreach ($array as $key => $a) {
             if ($a["name"]!="observacion" && $a["name"]!="idS") {
                 $detalleSolicitud=DetalleSolicitud::where('idSolicitud',$idSolicitud)->where('idPlanta',$a["name"])->first();
-
                 if ($a["value"]=="") {
                     //$detalleSolicitud->cantidadPagar=$detalleSolicitud->cantidad;
                     $cantidadPagar=$detalleSolicitud->cantidad;
@@ -260,8 +259,8 @@ class ProviderController extends Controller
                 //$detalleSolicitud->valorPagar=($a["value"]*$planta->valor);
                 $valorPagar=($cantidadPagar*$planta->valor);
 
-                $cantidadTotalPagar+=$detalleSolicitud->cantidadPagar;
-                $valorTotalPagar+=$detalleSolicitud->valorPagar;
+                $cantidadTotalPagar+=$cantidadPagar;
+                $valorTotalPagar+=$valorPagar;
                 //$detalleSolicitud->save();
                 DetalleSolicitud::where('idSolicitud',$idSolicitud)->where('idPlanta',$a["name"])->update(['cantidadPagar' => $cantidadPagar,'valorPagar' => $valorPagar]);
 
