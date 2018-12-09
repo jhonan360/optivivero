@@ -11,6 +11,7 @@ $("#formSeccion").on("submit", function(e){
     tipoPlanta=$("#tipoPlanta").val();
     cantidad=$("#cantidad").val();
     observacion=$("#observacion").val();
+    tempMax=$("#tempMax").val();
     paramSend=null;
     if (param=="Editar") {
         paramSend='update';
@@ -23,6 +24,7 @@ $("#formSeccion").on("submit", function(e){
     formData.append('cantidad',cantidad);
     formData.append('tipoPlanta',tipoPlanta);
     formData.append('observacion',observacion);
+    formData.append('tempMax',tempMax);
     formData.append('param',paramSend);
     $.ajax({
          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -92,13 +94,14 @@ function llenarTabla()
 				array[i][1],
 				array[i][2],
 				array[i][3],
-				array[i][4],
+                array[i][4],
+				array[i][5],
 	        ] ).draw( false );
 
 		}
 	});
 }
-function modal(id,idTipoPlanta,nombre,espacioTotal,observacion)
+function modal(id,idTipoPlanta,nombre,espacioTotal,observacion,tempMax)
 {
     window.scroll(0, 0);
     if (id!=undefined) {
@@ -107,6 +110,7 @@ function modal(id,idTipoPlanta,nombre,espacioTotal,observacion)
         $("#tipoPlanta").val(idTipoPlanta);
         $("#cantidad").val(espacioTotal);
         $("#observacion").val(observacion);
+        $("#tempMax").val(tempMax);
         $("#titleModal").html('<h4 id="titleModal" class="modal-title">Editar Sección</h4>');
         $("#btnModal1").val('Editar');
 
@@ -118,6 +122,7 @@ function modal(id,idTipoPlanta,nombre,espacioTotal,observacion)
         $("#tipoPlanta").val("");
         $("#cantidad").val("");
         $("#observacion").val("");
+        $("#tempMax").val("");
         $("#btnModal1").val('Crear');
 
     }

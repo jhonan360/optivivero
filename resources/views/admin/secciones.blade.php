@@ -35,6 +35,7 @@
                                         <th scope="col">Tipo Planta</th>
                                         <th scope="col">Espacio total</th>
                                         <th scope="col">Observación</th>
+                                        <th scope="col">Temperatura Max</th>
                                         <th scope="col">Editar</th>
                                     </tr>
                                 </thead>
@@ -65,8 +66,10 @@
                                 <option value="{{$tipoPlanta->idTipoPlanta}}" @if($tipoPlanta->idTipoPlanta == old('tipoPlanta')) selected @endif>{{$tipoPlanta->nombre}}</option>
                             @endforeach
                         </select>
-                        <label for="cantidad">Cantidad</label>
+                        <label for="cantidad">Espacio Total</label>
                         <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la catidad" required>
+                        <label for="tempMax">Temperatura Max</label>
+                        <input type="number" class="form-control" id="tempMax" name="tempMax" placeholder="Ingrese la temperatura maxima" required>
                         <label for="observacion">Observación</label>
                         <textarea type="text" class="form-control" id="observacion" name="observacion" placeholder="Ingrese la observación" rows="5" required> </textarea>
 
