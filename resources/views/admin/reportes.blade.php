@@ -5,7 +5,23 @@
     @section('leftMenu')
         @include('admin.section.leftMenu')
     @endsection
-
+    @section('style')
+        <style >
+            hr.style-five {
+                border: 0;
+                height: 0; /* Firefox... */
+                box-shadow: 0 0 10px 1px black;
+                margin-top: 60px;
+                margin-bottom: 40px;
+            }
+                hr.style-five:after {  /* Not really supposed to work, but does */
+                content: "\00a0";  /* Prevent margin collapse */
+            }
+            h1{
+                margin-bottom: 30px;
+            }
+        </style>
+    @endsection
     @section('content')
         <div class="row">
             <div class="col-xs-12 text-center">
@@ -13,7 +29,7 @@
             </div>
         </div>
         <div class="row">
-            <form method="post" id="reporteSensores">
+            <form method="GET" action="sensorReport" id="reporteSensores">
                 <div class="col-xs-12 col-md-5 text-center">
                     <label for="fechaIni">Fecha Inicial</label>
                     <input type="date"  id="fechaIni" name="fechaIni" required>
@@ -27,7 +43,7 @@
                 </div>
             </form>
         </div>
-        <hr style="width:100%">
+        <hr class="style-five" >
         <div class="row">
             <div class="col-xs-12 text-center">
                 <h1>Reportes plantas y secciones</h1>

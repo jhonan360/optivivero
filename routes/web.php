@@ -57,6 +57,10 @@ Route::group(['prefix' => 'admin'], function()
 	Route::post('/pagarVenta', 'AdminController@pagarVenta')->middleware('auth');
 	Route::post('/seccionAlmacenar', 'AdminController@seccionAlmacenar')->middleware('auth');
 	Route::post('/tableSeccion', 'AdminController@tableSeccion')->middleware('auth');
+
+	//reportes
+	Route::get('/sensorReport', 'ReportController@sensorReport')->middleware('auth');
+
 });
 
 
