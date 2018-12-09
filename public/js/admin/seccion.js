@@ -95,7 +95,8 @@ function llenarTabla()
 				array[i][2],
 				array[i][3],
                 array[i][4],
-				array[i][5],
+                array[i][5],
+				array[i][6],
 	        ] ).draw( false );
 
 		}

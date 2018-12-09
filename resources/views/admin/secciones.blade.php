@@ -33,6 +33,7 @@
                                     <tr>
                                         <th scope="col">Nombre  de la seccion</th>
                                         <th scope="col">Tipo Planta</th>
+                                        <th scope="col">Cantidad Existente</th>
                                         <th scope="col">Espacio total</th>
                                         <th scope="col">Observación</th>
                                         <th scope="col">Temperatura Max</th>

@@ -206,7 +206,7 @@ class AdminController extends Controller
             $b.="('".$planta->idPlanta."','".$planta->idTipoPlanta."','".$planta->nombre."','".$planta->cantidad."','".$planta->valor."')".'">';
             $b.='<i class="fa fa-pencil"></i></button>';
 
-            $c=money_format('%.0n',$planta->valor);
+            $c=($planta->valor);
 
             //array_push($array,array($planta->idPlanta,$planta->tipoPlanta->nombre,$planta->nombre,$planta->cantidad,'$'.$planta->valor,$b));
             array_push($array,array($planta->idPlanta,$planta->tipoPlanta->nombre,$planta->nombre,$planta->cantidad,$c,$b));
@@ -520,9 +520,10 @@ class AdminController extends Controller
         }
         return Response::json(array('html' => $idSeccion));
     }
+ 
     public function tableEntradas(Request $request)
     {
-        setlocale(LC_MONETARY, 'en_US.UTF-8');
+        
         $array=[];
         $arrayDetalle=[];
         $solicitudes=Solicitudes::whereHas('EstadosSolicitudes', function ($query) {
@@ -532,7 +533,7 @@ class AdminController extends Controller
             $btn='<button class="btn btn-success" data-toggle="modal" data-target="#modalPedido"  onclick="openModal('."'".$solicitud->idSolicitud."'".')"><i class="fa fa-eye"></i></button>';
             $btn2='<button class="btn btn-success" data-toggle="modal" data-target="#modalPedidoResponder"  onclick="openModal2('."'".$solicitud->idSolicitud."'".')"><i class="fa fa-eye"></i></button>';
             $estado=EstadosSolicitudes::where('idSolicitud',$solicitud->idSolicitud)->orderby('created_at','desc')->first();
-            array_push($array,array(($key+1).' '.$btn,$solicitud->proveedor->razonSocial,$solicitud->user->perfilamiento->nombres,$solicitud->nombre,$solicitud->fechaHora,$solicitud->cantidadTotalPagar,money_format('%.0n',$solicitud->valorTotalPagar),$estado->estado));
+            array_push($array,array(($key+1).' '.$btn,$solicitud->proveedor->razonSocial,$solicitud->user->perfilamiento->nombres,$solicitud->nombre,$solicitud->fechaHora,$solicitud->cantidadTotalPagar,($solicitud->valorTotalPagar),$estado->estado));
             array_push($arrayDetalle,array(DetalleSolicitud::where('idSolicitud',$solicitud->idSolicitud)->get()));
         }
         return Response::json(array('html' => $array,'matriz'=>$arrayDetalle));
@@ -559,16 +560,16 @@ class AdminController extends Controller
                                 <tbody>
         ';
         foreach ($detalleSolicitudes as $key => $detalleSolicitud) {
-            $html.="<tr align='center'><td>" . $detalleSolicitud->planta->nombre . "</td><td>" . $detalleSolicitud->cantidad. "</td><td>".$detalleSolicitud->cantidadPagar."</td><td>" . money_format('%.0n',$detalleSolicitud->valor). "</td><td>".money_format('%.0n',$detalleSolicitud->valorPagar)."</td>";
+            $html.="<tr align='center'><td>" . $detalleSolicitud->planta->nombre . "</td><td>" . $detalleSolicitud->cantidad. "</td><td>".$detalleSolicitud->cantidadPagar."</td><td>" . ($detalleSolicitud->valor). "</td><td>".($detalleSolicitud->valorPagar)."</td>";
             $planta = Plantas::where('nombre','like','%'.$detalleSolicitud->planta->nombre.'%')->first();
             if ($planta==null) {
                 $html.='<td> <input type="number" name="'.$detalleSolicitud->idPlanta.'" id="'.$detalleSolicitud->idPlanta.'" required></td></tr>';
             }else{
-                $html.='<td>'.money_format('%.0n',$planta->valor).'</td></tr>';
+                $html.='<td>'.($planta->valor).'</td></tr>';
             }
             $suma+=$detalleSolicitud->valorPagar;
         }
-        $html.='<tr id="total" align="center"><td scope="col" colspan="4">TOTAL</td><td scope="col">'.money_format('%.0n',$suma).'</td><td></td></tr>
+        $html.='<tr id="total" align="center"><td scope="col" colspan="4">TOTAL</td><td scope="col">'.($suma).'</td><td></td></tr>
             </tbody>
             </table>
             <br>
@@ -834,11 +835,17 @@ class AdminController extends Controller
         $html='';
         $secciones=Secciones::all();
         foreach ($secciones as $key => $seccion) {
+            $cantidadRealSeccion = DB::select("SELECT SUM(cantidad) AS 'count' FROM detallesecciones WHERE idSeccion='".$seccion->idSeccion."'GROUP by idSeccion"); 
+            if ($cantidadRealSeccion!=null) {
+                $cantidadRealSeccion=$cantidadRealSeccion[0]->count;
+            }else{
+                $cantidadRealSeccion=0;
+            }         
             $b=' <button class="btn btn-warning" style="margin-top: 2%; margin-bottom: 5%;" data-toggle="modal" data-target="#modalSeccion" type="button" onclick="modal';
             $b.="('".$seccion->idSeccion."','".$seccion->idTipoPlanta."','".$seccion->nombre."','".$seccion->espacioTotal."','".$seccion->observacion."','".$seccion->tempMax."')".'">';
             $b.='<i class="fa fa-pencil"></i></button>';
             array_push($array,array(
-                $seccion->nombre,$seccion->tipoPlanta->nombre,$seccion->espacioTotal,$seccion->observacion,$seccion->tempMax.'ºC',$b));
+                $seccion->nombre,$seccion->tipoPlanta->nombre,$cantidadRealSeccion,$seccion->espacioTotal,$seccion->observacion,$seccion->tempMax.'ºC',$b));
         }
         return Response::json(array('html' => $array));
     }
