@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Storage;
 use File;
 use date;
-
+use OneSignal;
 use \Response;
 use App\AlmacenDatos;
 use App\Parametros;
@@ -48,8 +48,15 @@ class ApiController extends Controller
 
     	}
 
-            
+
             if ($temperatura1>=$seccion->tempMax) {
+                OneSignal::sendNotificationToAll(
+                    "Temperatura Maxima Alcanzada Abriendo Valvula De Riego",
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
                 $seccion->valvula=1;
                 $seccion->save();
                 echo "C=".$seccion->valvula;
@@ -62,13 +69,14 @@ class ApiController extends Controller
                     echo "C=".$seccion->valvulaBoton;
                 }
             }
-        
 
-    }    
+
+    }
     public function prueba(Request $request)
     {
+
     	return date("H:i:s");
-		
+
 		$temperatura1=$_GET['temp1'];
 		$humedad=$_GET['humedad'];
     	$almacen = new AlmacenDatos;

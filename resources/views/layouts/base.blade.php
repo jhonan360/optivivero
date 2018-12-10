@@ -11,7 +11,16 @@
 
     <title>{{ config('app.name', 'OPTIVIVERO') }}</title>
 
-
+    @if(auth()->user()->hasRole('Admin')||auth()->user()->hasRole('User'))
+        <script>
+          var OneSignal = window.OneSignal || [];
+          OneSignal.push(function() {
+            OneSignal.init({
+              appId: "a561bc4f-7c5a-47b8-a783-d30eb7427a17",
+            });
+          });
+        </script>
+    @endif
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -108,7 +117,10 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('dist/js/sb-admin-2.js')}}"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
     @yield('javascript')
+
 </body>
 
 </html>

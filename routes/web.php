@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/prueba', 'ApiController@prueba')->name('prueba');
+Route::post('/valvula','ApiController@valvula')->middleware('auth');
 
 Route::group(['prefix' => 'admin'], function()
 {
@@ -104,4 +105,3 @@ Route::group(['prefix' => 'provider'], function()
 
 });
 
-Route::post('/valvula','ApiController@valvula')->middleware('auth');

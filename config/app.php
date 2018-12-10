@@ -163,6 +163,8 @@ return [
         Way\Generators\GeneratorsServiceProvider::class,
         Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        //Dreamonkey\OneSignal\OneSignalServiceProvider::class,
+        Berkayk\OneSignal\OneSignalServiceProvider::class
     ],
 
     /*
@@ -212,7 +214,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-
+        //'OneSignal' => Dreamonkey\OneSignal\Facades\OneSignal::class,
+        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class
     ],
 
 ];
