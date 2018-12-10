@@ -76,6 +76,7 @@
             </tbody>
         </table>
     </div>
+    <p style="text-align:justify"> ACA SE COLOCA LA RECOMENDACION </p>
 </div>
 @endsection
 @section('scripts')
