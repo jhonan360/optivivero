@@ -76,7 +76,9 @@
             </tbody>
         </table>
     </div>
-    <p style="text-align:justify"> ACA SE COLOCA LA RECOMENDACION </p>
+    <p style="text-align:justify"> Este inventario se encuentra dividido por dos partes:<br>
+    - secciones: cantidad de espacios donde se ubican las plantas<br>
+    - Plantas: cantidad existente de plantas </p>
 </div>
 @endsection
 @section('scripts')
