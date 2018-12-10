@@ -85,6 +85,10 @@
 	<form action="">
         <input type="hidden" id="grafica" data-grafica="{{ $grafica }}">
      </form>
+     <p style="text-align:justify"> Segun la captura de variables climaticas, usted debe tener en cuenta lo siguiente:<br>
+    - El sistema de riego solo se abrira cuando pase la temperatura maxima de cada seccion y se cerrara cuando llegue a una temperatura optima<br>
+    - El modo manual de abrir el riego, no se activara hasta que la seccion llegue una temperatura ideal<br>
+	- Para obtener una grafica detallada ir a inicio y buscar las fechas del reporte</p>
 </div>
 @endsection
 @section('scripts')
