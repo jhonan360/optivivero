@@ -60,6 +60,7 @@ Route::group(['prefix' => 'admin'], function()
 
 	//reportes
 	Route::get('/sensorReport', 'ReportController@sensorReport')->middleware('auth');
+	Route::get('/inventarioReport', 'ReportController@inventarioReport')->middleware('auth');
 
 });
 
@@ -97,6 +98,9 @@ Route::group(['prefix' => 'provider'], function()
 	Route::post('/formResponderSolicitud', 'ProviderController@formResponderSolicitud')->middleware('auth');
 	Route::post('/pendienteAlmacenar', 'ProviderController@pendienteAlmacenar')->middleware('auth');
 	Route::post('/tableRealizados', 'ProviderController@tableRealizados')->middleware('auth');
+	//reportes
+	Route::get('/sensorReport', 'ReportController@sensorReport')->middleware('auth');
+	Route::get('/inventarioReport', 'ReportController@inventarioReport')->middleware('auth');
 
 });
 

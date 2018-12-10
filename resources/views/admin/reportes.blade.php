@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="row">
-            <form method="GET" action="sensorReport" id="reporteSensores">
+            <form   id="reporteSensores">
                 <div class="col-xs-12 col-md-5 text-center">
                     <label for="fechaIni">Fecha Inicial</label>
                     <input type="date"  id="fechaIni" name="fechaIni" required>
@@ -51,13 +51,32 @@
         </div>
         <div class="row">
             <div class="col-xs-12 text-center">
-                <button class="btn btn-success btn-lg">Generar</button>
+                <button class="btn btn-success btn-lg" onclick="inventario()">Generar</button>
             </div>
         </div>
     @endsection
-
+    @section('javascript')
+        <script >
+            $("#reporteSensores").on("submit", function(e){
+                e.preventDefault();
+                fechaIni=$("#fechaIni").val();
+                fechaFin=$("#fechaFin").val();
+                if(fechaIni>fechaFin){
+                    alert("La fecha final debe ser mayor que la fecha inicial");
+                }else{
+                    window.open("sensorReport?fechaIni="+fechaIni+"&fechaFin="+fechaFin);
+                }
+                return false;
+            });
+            function inventario(){
+                window.open("inventarioReport/");
+            }
+        </script>
+    @endsection
 
 
 @else
-    
+    <div class="col-md-12 col-ls-12 col-sm-12 text-center">
+        <h1>No tiene permisos para ver esta página</h1>
+    </div>
 @endif

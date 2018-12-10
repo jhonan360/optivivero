@@ -520,10 +520,10 @@ class AdminController extends Controller
         }
         return Response::json(array('html' => $idSeccion));
     }
- 
+
     public function tableEntradas(Request $request)
     {
-        
+
         $array=[];
         $arrayDetalle=[];
         $solicitudes=Solicitudes::whereHas('EstadosSolicitudes', function ($query) {
@@ -667,7 +667,6 @@ class AdminController extends Controller
                         $cantidadRealPlanta=0;
                     }else{
                         $cantidadRealPlanta=$cantidadRealPlanta[0]->count;
-
                     }
                     $cantidadRealSeccion = DB::select("SELECT SUM(cantidad) AS 'count' FROM detallesecciones WHERE idSeccion='".$seccion->idSeccion."'GROUP by idSeccion");
                     if ($cantidadRealSeccion!=null) {
@@ -835,12 +834,12 @@ class AdminController extends Controller
         $html='';
         $secciones=Secciones::all();
         foreach ($secciones as $key => $seccion) {
-            $cantidadRealSeccion = DB::select("SELECT SUM(cantidad) AS 'count' FROM detallesecciones WHERE idSeccion='".$seccion->idSeccion."'GROUP by idSeccion"); 
+            $cantidadRealSeccion = DB::select("SELECT SUM(cantidad) AS 'count' FROM detallesecciones WHERE idSeccion='".$seccion->idSeccion."'GROUP by idSeccion");
             if ($cantidadRealSeccion!=null) {
                 $cantidadRealSeccion=$cantidadRealSeccion[0]->count;
             }else{
                 $cantidadRealSeccion=0;
-            }         
+            }
             $b=' <button class="btn btn-warning" style="margin-top: 2%; margin-bottom: 5%;" data-toggle="modal" data-target="#modalSeccion" type="button" onclick="modal';
             $b.="('".$seccion->idSeccion."','".$seccion->idTipoPlanta."','".$seccion->nombre."','".$seccion->espacioTotal."','".$seccion->observacion."','".$seccion->tempMax."')".'">';
             $b.='<i class="fa fa-pencil"></i></button>';
